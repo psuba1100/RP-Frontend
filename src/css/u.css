@@ -1,0 +1,29 @@
+nav, footer {
+  min-height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  background-color: #111111;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 0 2rem 0 2rem;
+}
+
+h2 {
+  font-size: 2rem;
+  margin: 0 2rem 0 2rem;
+  text-align: center;
+}
+
+.g-2 {
+  gap: 2rem;
+}
+
+.btn-v {
+  flex-direction: column;
+  width: 50%;
+}

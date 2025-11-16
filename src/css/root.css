@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  height: 100%;
+  background: #1C1C1C;
+  color: #F5E8D8;
+}
+
+#root{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  margin-top: 0;
+  padding: 0.5rem 1rem;
+  background: #1f2937;        /* dark gray */
+  color: #f3f4f6;             /* light text */
+  border: 1px solid #374151;  /* subtle outline */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  background: #272f3f;        /* slightly lighter */
+  border-color: #4b5563;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  background: #3f4755;
+  border-color: #3f4755;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #374151;   /* dark border */
+  background: #111827;         /* deep dark */
+  color: #f3f4f6;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input::placeholder {
+  color: #6b7280;              /* gray placeholder */
+}
+
+.input:hover {
+  border-color: #4b5563;
+}
+
+.input:focus {
+  border-color: #818cf8;       /* subtle indigo accent */
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+  background: #1a2233;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-h {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+}
+
+p{
+  text-align: center;
+  margin: 1rem;
+}
+
+svg{
+  vertical-align: bottom;
+}
+
+.t-10{
+  max-width: 10ch;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 300px;
+}
