@@ -45,7 +45,7 @@ export default function U() {
         </div>
         <aside className='container g-2'>
           <button className='btn btn-v'><BookType />Your study hub</button>
-          <button className='btn btn-v'><StickyNote /> Your flashcard library</button>
+          <button className='btn btn-v' onClick={() => navigate('/u/flashcards')}><StickyNote /> Your flashcard library</button>
           <button className='btn btn-v' onClick={() => navigate('/u/tasks')}><SquareCheckBig /> Your upcoming challanges</button>
         </aside>
       </div>

@@ -7,6 +7,8 @@ import DashLayout from './components/layouts/DashLayout';
 import U from './pages/U';
 import RequireAuth from './components/auth/RequireAuth';
 import Tasks from './pages/Tasks';
+import CreateFlashcard from './pages/CreateFlashcard';
+import Flashcards from './pages/Flashcards';
 
 function App() {
 
@@ -25,8 +27,9 @@ function App() {
             <Route index element={<U />} />
 
             <Route path='utilities' />
-            <Route path='flashcards' />
-            <Route path='tasks' index element={<Tasks/>}/>
+            <Route path='flashcards' index element={<Flashcards />} />
+            <Route path='tasks' index element={<Tasks />} />
+            <Route path='create' index element={<CreateFlashcard />} />
           </Route>
         </Route>
       </Route>
