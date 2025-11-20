@@ -1,15 +1,15 @@
 import { CircleCheckBig } from "lucide-react";
-import axios from "../../api/axios";
 import { useAuthStore } from "../../store/authStore";
 import { useSearchParams } from "react-router-dom";
 import { useTasksStore } from "../../store/tasksStore";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const TASKS_URL = '/u/todo'
 
 export default function Task({ task }) {
-    const accessToken = useAuthStore((s) => s.accessToken)
     const fetchTasks = useTasksStore((s) => s.fetchTasks)
     const [searchParams, setSearchParams] = useSearchParams();
+    const axiosPrivate = useAxiosPrivate()
 
     const datum = new Date(task.dueDate).toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -23,20 +23,22 @@ export default function Task({ task }) {
         const p = searchParams.get("p");
         const s = searchParams.get("s");
         try {
-            const response = await axios.delete(TASKS_URL, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
-                },
+            const response = await axiosPrivate.delete(TASKS_URL, {
                 data: {
                     taskId: task._id
-                },
-                withCredentials: true
+                }
             })
 
             fetchTasks(p, s)
         } catch (err) {
-            console.error(err)
+            console.log(err)
+            const status = err?.response?.status;
+            const message = err?.response?.data?.message || "Unknown error";
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
+            }
         }
     }
 

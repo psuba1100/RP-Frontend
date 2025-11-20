@@ -1,34 +1,31 @@
 import { create } from "zustand";
-import axios from "../api/axios";
-import { useAuthStore } from "./authStore";
 const TASKS_URL = '/u/todo'
 
 export const useTasksStore = create((set) => ({
     tasks: [],
     count: [],
-    fetchTasks: async (p, s) => {
-        const {accessToken} = useAuthStore.getState()
+    fetchTasks: async (axiosPrivate, p, s) => {
         try {
-            const response = await axios.get(TASKS_URL,
+            const response = await axiosPrivate.get(TASKS_URL,
                 {
                     params: {
                         ...(s && { s }),
                         ...(p && { p }),
-                    },
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${accessToken}`
-                    },
-                    withCredentials: true
+                    }
                 }
             )
-
             set({
                 tasks: response.data.tasks,
                 count: response.data.count
             })
         } catch (err) {
             console.error(err)
+            const status = err?.response?.status;
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
+            }
         }
     }
 }))

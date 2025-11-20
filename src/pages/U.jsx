@@ -3,15 +3,17 @@ import '../css/u.css'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTasksStore } from '../store/tasksStore'
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
 
 export default function U() {
   const [task, setTask] = useState('')
   const navigate = useNavigate()
   const fetchTasks = useTasksStore((s) => s.fetchTasks)
   const tasks = useTasksStore((s) => s.tasks)
+  const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
-    fetchTasks()
+    fetchTasks(axiosPrivate)
   }, [])
 
   useEffect(() => {

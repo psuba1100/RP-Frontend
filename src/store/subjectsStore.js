@@ -1,28 +1,23 @@
 import { create } from 'zustand'
-import { useAuthStore } from './authStore'
-import axios from '../api/axios'
 
 const SUBJECTS_URL = '/u/subject'
 
 export const useSubjectStore = create((set) => ({
     subjects: [],
-    fetchSubjects: async () => {
-        const { accessToken } = useAuthStore.getState()
+    fetchSubjects: async (axiosPrivate) => {
         try {
-            const response = await axios.get(SUBJECTS_URL,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${accessToken}`
-                    },
-                    withCredentials: true
-                }
-            )
+            const response = await axiosPrivate.get(SUBJECTS_URL)
             set({
                 subjects: response.data
             })
         } catch (err) {
             console.error(err)
+            const status = err?.response?.status;
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
+            }
         }
     }
 }))

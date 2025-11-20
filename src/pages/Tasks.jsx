@@ -5,8 +5,9 @@ import { useTasksStore } from "../store/tasksStore";
 import { useSearchParams } from "react-router-dom";
 import { useSubjectStore } from "../store/subjectsStore";
 import Modal from "../components/utility/Modal";
-import axios from "../api/axios";
 import { useAuthStore } from "../store/authStore";
+import { v4 as uuidv4 } from 'uuid';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const TODO_TASK_URL = '/u/todo'
 
@@ -27,12 +28,14 @@ export default function Tasks() {
     const p = parseInt(searchParams.get("p")) || 1
     const s = searchParams.get("s") || ""
 
+    const axiosPrivate = useAxiosPrivate()
+
     const createPages = (min, max, current) => {
         const result = [current]
 
         for (let i = 1; i <= 3; i++) {
             if (current - i >= min) {
-                result.unshift(<button key={current - i} onClick={(e) => setSearchParams({ p: current - i, s })} className="btn">{current - i}</button>);
+                result.unshift(<button key={uuidv4()} onClick={(e) => setSearchParams({ p: current - i, s })} className="btn">{current - i}</button>);
             } else {
                 break;
             }
@@ -40,34 +43,32 @@ export default function Tasks() {
 
         for (let i = 1; i <= 3; i++) {
             if (current + i <= max) {
-                result.push(<button key={current + i} onClick={(e) => setSearchParams({ p: current + i, s })} className="btn">{current + i}</button>);
+                result.push(<button key={uuidv4()} onClick={(e) => setSearchParams({ p: current + i, s })} className="btn">{current + i}</button>);
             } else {
                 break;
             }
         }
 
-        console.log(min, max, current, result)
-
         setPageLinks(result)
     }
     useEffect(() => {
-        fetchTasks(p, s)
-        fetchSubjects()
+        fetchTasks(axiosPrivate, p, s)
+        fetchSubjects(axiosPrivate)
         createPages(0, Math.floor(count / 10), p)
     }, [])
 
     const [selected, setSelected] = useState("")
 
     useEffect(() => {
-        fetchTasks(p, s)
-        fetchSubjects()
+        fetchTasks(axiosPrivate, p, s)
+        fetchSubjects(axiosPrivate)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [p])
 
     useEffect(() => {
         setSearchParams({ p: 1, s })
-        fetchTasks(p, s)
-        fetchSubjects()
+        fetchTasks(axiosPrivate, p, s)
+        fetchSubjects(axiosPrivate)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [s])
 
@@ -76,7 +77,6 @@ export default function Tasks() {
 
         setSelected(e.target.value);
         setSearchParams({ s: e.target.value, p })
-        console.log("Selected:", e.target.value);
     }
 
     useEffect(() => {
@@ -94,17 +94,11 @@ export default function Tasks() {
         setOpen(false)
 
         try {
-            const response = await axios.post(TODO_TASK_URL, {
+            const response = await axiosPrivate.post(TODO_TASK_URL, {
                 title: taskTitle,
                 description: taskDescription,
                 subject: taskSubject,
                 dueDate: taskDueDate
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
-                },
-                withCredentials: true
             })
 
             setTaskTitle('')
@@ -113,13 +107,18 @@ export default function Tasks() {
             setTaskDueDate('')
 
             setErrMsg(response.data.message)
-            fetchTasks()
+            fetchTasks(axiosPrivate)
         } catch (err) {
-            if(!err?.response?.data?.message){
-                setErrMsg('There was problem with creating a task')
-            } else {
-                setErrMsg(err.response.data.message)
+            console.log(err)
+            const status = err?.response?.status;
+            const message = err?.response?.data?.message || "Unknown error";
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
             }
+
+            setErrMsg(message)
         }
     }
 
@@ -128,7 +127,7 @@ export default function Tasks() {
             <p>{errMsg}</p>
             <h2>Maturity is not by age, but by the acceptance of your responsibilities:</h2>
 
-            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects() }}><Plus /> Add new task</button>
+            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate) }}><Plus /> Add new task</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
                     <form onSubmit={createTask}>
@@ -137,7 +136,7 @@ export default function Tasks() {
                             <select required value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)}>
                                 <option value="">— None —</option>
                                 {subjects.map((taskSubject) => (
-                                    <option key={taskSubject} value={taskSubject}>
+                                    <option key={uuidv4()} value={taskSubject}>
                                         {taskSubject}
                                     </option>
                                 ))}
@@ -178,7 +177,7 @@ export default function Tasks() {
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
                     {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
+                        <option key={uuidv4()} value={subject}>
                             {subject}
                         </option>
                     ))}

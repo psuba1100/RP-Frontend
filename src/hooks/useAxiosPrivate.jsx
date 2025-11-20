@@ -7,10 +7,8 @@ export default function useAxiosPrivate() {
     const accessToken = useAuthStore((s) => s.accessToken)
 
     useEffect(()=>{
-        console.log('implementing interceptors...')
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config => {
-                console.log("final headers sent:", config.headers);
                 if(!config.headers['Authorization']) {
                     config.headers['Authorization'] = `Bearer ${accessToken}`
                 }
@@ -26,9 +24,7 @@ export default function useAxiosPrivate() {
                 const prevRequest = err?.config
                 if(err?.response?.status === 403 && !prevRequest?.sent){
                     prevRequest.sent = true
-                    console.log(`Old access token: ${accessToken}`)
                     const newAccessToken = await refresh()
-                    console.log(`New access token ${newAccessToken}`)
                     prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
                     return axiosPrivate(prevRequest)
                 }
