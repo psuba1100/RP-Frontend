@@ -1,14 +1,14 @@
 import { create } from 'zustand'
 
-const SUBJECTS_URL = '/u/subject'
-
-export const useSubjectStore = create((set) => ({
-    subjects: [],
-    fetchSubjects: async (axiosPrivate, location) => {
+export const useFlashcardStore = create((set) => ({
+    metadata: {},
+    questions: [],
+    fetchFlashcard: async (axiosPrivate, location, flashcardId) => {
         try {
-            const response = await axiosPrivate.get(SUBJECTS_URL)
+            const response = await axiosPrivate.get(`r/flashcard/${flashcardId}`,)
             set({
-                subjects: response.data
+                metadata: response.data.metadata,
+                questions: response.data.questions
             })
         } catch (err) {
             console.error(err)
@@ -16,7 +16,6 @@ export const useSubjectStore = create((set) => ({
 
             if (status === 401 || status === 403) {
                 navigate('/login', { state: { from: location }, replace: true });
-                return;
             }
         }
     }

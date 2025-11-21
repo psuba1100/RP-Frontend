@@ -1,7 +1,7 @@
 import { BookType, Coffee, SquareCheckBig, StickyNote } from 'lucide-react'
 import '../css/u.css'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useTasksStore } from '../store/tasksStore'
 import useAxiosPrivate from '../hooks/useAxiosPrivate'
 
@@ -11,9 +11,10 @@ export default function U() {
   const fetchTasks = useTasksStore((s) => s.fetchTasks)
   const tasks = useTasksStore((s) => s.tasks)
   const axiosPrivate = useAxiosPrivate()
+  const location = useLocation()
 
   useEffect(() => {
-    fetchTasks(axiosPrivate)
+    fetchTasks(axiosPrivate, location)
   }, [])
 
   useEffect(() => {

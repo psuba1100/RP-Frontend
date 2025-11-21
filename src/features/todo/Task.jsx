@@ -29,7 +29,7 @@ export default function Task({ task }) {
                 }
             })
 
-            fetchTasks(p, s)
+            fetchTasks(axiosPrivate, location, p, s)
         } catch (err) {
             console.log(err)
             const status = err?.response?.status;

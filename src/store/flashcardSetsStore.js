@@ -1,12 +1,11 @@
-import { create } from "zustand";
-const TASKS_URL = '/u/todo'
+import { create } from 'zustand'
 
-export const useTasksStore = create((set) => ({
-    tasks: [],
+export const useFlashcardSetsStore = create((set) => ({
+    flashcardSets: [],
     count: 0,
-    fetchTasks: async (axiosPrivate, location, p, s) => {
+    fetchFlashcardSets: async (axiosPrivate, location, p, s) => {
         try {
-            const response = await axiosPrivate.get(TASKS_URL,
+            const response = await axiosPrivate.get('u/flashcards',
                 {
                     params: {
                         ...(s && { s }),
@@ -15,7 +14,7 @@ export const useTasksStore = create((set) => ({
                 }
             )
             set({
-                tasks: response.data.tasks,
+                flashcardSets: response.data.flashcards,
                 count: response.data.count
             })
         } catch (err) {

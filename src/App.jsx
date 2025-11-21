@@ -9,6 +9,7 @@ import RequireAuth from './components/auth/RequireAuth';
 import Tasks from './pages/Tasks';
 import CreateFlashcard from './pages/CreateFlashcard';
 import Flashcards from './pages/Flashcards';
+import Flashcard from './pages/Flashcard';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='u' element={<DashLayout />}>
             <Route index element={<U />} />
 
+            <Route path='flashcard/:flashcardId' index element={<Flashcard/>} />
             <Route path='utilities' />
             <Route path='flashcards' index element={<Flashcards />} />
             <Route path='tasks' index element={<Tasks />} />

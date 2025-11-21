@@ -6,6 +6,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useSubjectStore } from "../store/subjectsStore";
 import { useState } from "react";
 import Modal from "../components/utility/Modal";
+import { useLocation } from "react-router-dom";
 
 export default function CreateFlashcard() {
     const cards = useNewFlashcardStore((s) => s.cards);
@@ -14,6 +15,7 @@ export default function CreateFlashcard() {
     const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
     const subjects = useSubjectStore((s) => s.subjects)
     const axiosPrivate = useAxiosPrivate()
+    const location = useLocation()
 
     const [open, setOpen] = useState(false)
     const [title, setTitle] = useState('')
@@ -71,7 +73,7 @@ export default function CreateFlashcard() {
             {Object.entries(cards).map(([id, card]) => (
                 <CreationCard key={id} id={id} card={card} />
             ))}
-            <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate) }}>Dump cards store</button>
+            <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location) }}>Dump cards store</button>
 
             {open && (
                 <Modal onClose={() => setOpen(false)}>

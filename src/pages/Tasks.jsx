@@ -2,7 +2,7 @@ import { Coffee, Plus } from "lucide-react";
 import { useEffect, useState } from "react"
 import Task from "../features/todo/Task";
 import { useTasksStore } from "../store/tasksStore";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useSubjectStore } from "../store/subjectsStore";
 import Modal from "../components/utility/Modal";
 import { useAuthStore } from "../store/authStore";
@@ -15,7 +15,6 @@ export default function Tasks() {
     const fetchTasks = useTasksStore((s) => s.fetchTasks)
     const tasks = useTasksStore((s) => s.tasks)
     const count = useTasksStore((s) => s.count)
-    const accessToken = useAuthStore((s) => s.accessToken)
 
     const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
     const subjects = useSubjectStore((s) => s.subjects)
@@ -29,6 +28,7 @@ export default function Tasks() {
     const s = searchParams.get("s") || ""
 
     const axiosPrivate = useAxiosPrivate()
+    const location = useLocation()
 
     const createPages = (min, max, current) => {
         const result = [current]
@@ -52,23 +52,23 @@ export default function Tasks() {
         setPageLinks(result)
     }
     useEffect(() => {
-        fetchTasks(axiosPrivate, p, s)
-        fetchSubjects(axiosPrivate)
+        fetchTasks(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate, location)
         createPages(0, Math.floor(count / 10), p)
     }, [])
 
     const [selected, setSelected] = useState("")
 
     useEffect(() => {
-        fetchTasks(axiosPrivate, p, s)
-        fetchSubjects(axiosPrivate)
+        fetchTasks(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate, location)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [p])
 
     useEffect(() => {
         setSearchParams({ p: 1, s })
-        fetchTasks(axiosPrivate, p, s)
-        fetchSubjects(axiosPrivate)
+        fetchTasks(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate, location)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [s])
 
@@ -107,7 +107,7 @@ export default function Tasks() {
             setTaskDueDate('')
 
             setErrMsg(response.data.message)
-            fetchTasks(axiosPrivate)
+            fetchTasks(axiosPrivate, location)
         } catch (err) {
             console.log(err)
             const status = err?.response?.status;
@@ -127,7 +127,7 @@ export default function Tasks() {
             <p>{errMsg}</p>
             <h2>Maturity is not by age, but by the acceptance of your responsibilities:</h2>
 
-            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate) }}><Plus /> Add new task</button>
+            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location) }}><Plus /> Add new task</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
                     <form onSubmit={createTask}>

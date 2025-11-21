@@ -1,0 +1,113 @@
+import { useSearchParams } from "react-router-dom"
+import { useFlashcardSetsStore } from "../../store/flashcardSetsStore"
+import { useSubjectStore } from "../../store/subjectsStore"
+import { useEffect, useState } from "react"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import { v4 as uuidv4 } from 'uuid'
+import CardSet from "./CardSet"
+import { Lightbulb } from "lucide-react"
+
+export default function CardList() {
+    const fetchFlashcardSets = useFlashcardSetsStore((s) => s.fetchFlashcardSets)
+    const flashcardSets = useFlashcardSetsStore((s) => s.flashcardSets)
+    const count = useFlashcardSetsStore((s) => s.count)
+
+    const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
+    const subjects = useSubjectStore((s) => s.subjects)
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [pageLinks, setPageLinks] = useState([])
+
+    const p = parseInt(searchParams.get("p")) || 1
+    const s = searchParams.get("s") || ""
+
+    const axiosPrivate = useAxiosPrivate()
+
+    const createPages = (min, max, current) => {
+        const result = [current]
+
+        for (let i = 1; i <= 3; i++) {
+            if (current - i >= min) {
+                result.unshift(<button key={uuidv4()} onClick={(e) => setSearchParams({ p: current - i, s })} className="btn">{current - i}</button>);
+            } else {
+                break;
+            }
+        }
+
+        for (let i = 1; i <= 3; i++) {
+            if (current + i <= max) {
+                result.push(<button key={uuidv4()} onClick={(e) => setSearchParams({ p: current + i, s })} className="btn">{current + i}</button>);
+            } else {
+                break;
+            }
+        }
+
+        setPageLinks(result)
+    }
+
+    useEffect(() => {
+        fetchFlashcardSets(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate, location)
+        createPages(0, Math.floor(count / 10), p)
+    }, [])
+
+    const [selected, setSelected] = useState("")
+
+    useEffect(() => {
+        fetchFlashcardSets(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate)
+        createPages(1, Math.floor(count / 10) + 1, parseInt(p))
+    }, [p])
+
+    useEffect(() => {
+        setSearchParams({ p: 1, s })
+        fetchFlashcardSets(axiosPrivate, location, p, s)
+        fetchSubjects(axiosPrivate, location)
+        createPages(1, Math.floor(count / 10) + 1, parseInt(p))
+    }, [s])
+
+    const changeSubject = (e) => {
+        e.preventDefault()
+
+        setSelected(e.target.value);
+        setSearchParams({ s: e.target.value, p })
+    }
+
+    useEffect(() => {
+        createPages(1, Math.floor(count / 10) + 1, parseInt(p))
+    }, [count])
+
+    return (
+        <section className="container">
+            <h2>Don't practice until you get it right. <br/> Practice until you can't get it wrong.</h2>
+
+            <label>
+                Pick a subject to filter by:
+                <select value={selected} onChange={changeSubject}>
+                    <option value="">— None —</option>
+                    {subjects.map((subject) => (
+                        <option key={uuidv4()} value={subject}>
+                            {subject}
+                        </option>
+                    ))}
+                </select>
+            </label>
+
+            <ul>
+                {flashcardSets?.length
+                    ? flashcardSets.map(card => <CardSet key={card._id} card={card} axiosPrivate={axiosPrivate} />)
+                    : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
+                }
+            </ul>
+            <div className="container-h">
+                {pageLinks?.length
+                    ? pageLinks.map(link => <>{link}</>)
+                    : <></>
+                }
+            </div>
+
+            <button className="btn" onClick={() => {console.log(flashcardSets)}}>Dump flashcardSets</button>
+        </section>
+    )
+}
