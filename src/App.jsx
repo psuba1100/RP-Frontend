@@ -10,6 +10,7 @@ import Tasks from './pages/Tasks';
 import CreateFlashcard from './pages/CreateFlashcard';
 import Flashcards from './pages/Flashcards';
 import Flashcard from './pages/Flashcard';
+import FlashcardLayout from './components/layouts/FlashcardLayout';
 
 function App() {
 
@@ -27,7 +28,9 @@ function App() {
           <Route path='u' element={<DashLayout />}>
             <Route index element={<U />} />
 
-            <Route path='flashcard/:flashcardId' index element={<Flashcard/>} />
+            <Route path='flashcard' element={<FlashcardLayout />} >
+              <Route path=':flashcardId' index element={<Flashcard />} />
+            </Route>
             <Route path='utilities' />
             <Route path='flashcards' index element={<Flashcards />} />
             <Route path='tasks' index element={<Tasks />} />

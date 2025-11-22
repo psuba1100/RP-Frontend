@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import '../css/form.css'
 import axios from "../api/axios";
 
 export default function Register() {

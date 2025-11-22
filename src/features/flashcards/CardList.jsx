@@ -81,7 +81,7 @@ export default function CardList() {
 
             <ul>
                 {flashcardSets?.length
-                    ? flashcardSets.map(card => <CardSet key={card._id} card={card} axiosPrivate={axiosPrivate} />)
+                    ? flashcardSets.map(card => <CardSet key={card._id} card={card} />)
                     : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
                 }
             </ul>

@@ -1,14 +1,10 @@
 import { BrainCircuit, Trash } from "lucide-react"
-import { useFlashcardStore } from "../../store/flashcardStore"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
-export default function CardSet({ card, axiosPrivate }) {
-    const fetchFlashcard = useFlashcardStore((s) => s.fetchFlashcard)
-    const location = useLocation()
+export default function CardSet({ card }) {
     const navigate = useNavigate()
 
     const redirectToFlashcard = (e) => {
-        fetchFlashcard(axiosPrivate, location, card.flashcardId)
         navigate(`/u/flashcard/${card.flashcardId}`)
     }
 

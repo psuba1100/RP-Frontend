@@ -1,5 +1,4 @@
 import { BookType, Coffee, SquareCheckBig, StickyNote } from 'lucide-react'
-import '../css/u.css'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useTasksStore } from '../store/tasksStore'

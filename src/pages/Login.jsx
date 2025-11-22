@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import '../css/form.css'
 import { useAuthStore } from "../store/authStore"
 import axios from "../api/axios"
 import { useLocation, useNavigate } from "react-router-dom"

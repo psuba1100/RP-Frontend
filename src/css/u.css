@@ -8,6 +8,11 @@ nav, footer {
   z-index: 1;
 }
 
+footer {
+  margin-top: auto;
+  width: 100%;
+}
+
 h1 {
   font-size: 3rem;
   margin: 0 2rem 0 2rem;
@@ -26,4 +31,12 @@ h2 {
 .btn-v {
   flex-direction: column;
   width: 50%;
+}
+
+.main{
+  min-height: 90vh;
+}
+
+.element{
+  max-width: 25%;
 }

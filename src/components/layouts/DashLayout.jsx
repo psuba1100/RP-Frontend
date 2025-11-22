@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../../store/authStore"
-import '../../css/u.css'
 import { House, LogOut } from "lucide-react"
 import axios from "../../api/axios"
 
