@@ -1,19 +1,17 @@
-import { useSearchParams } from "react-router-dom"
-import { useFlashcardSetsStore } from "../../store/flashcardSetsStore"
-import { useSubjectStore } from "../../store/subjectsStore"
-import { useEffect, useState } from "react"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import { v4 as uuidv4 } from 'uuid'
-import CardSet from "./CardSet"
-import { Lightbulb } from "lucide-react"
+import { useLocation, useSearchParams } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useSubjectStore } from "../../store/subjectsStore";
+import Task from './Task.jsx'
+import { useTasksStore } from "../../store/tasksStore";
+import { useEffect, useState } from "react";
+import { Coffee } from "lucide-react";
 
-export default function CardList() {
-    const fetchFlashcardSets = useFlashcardSetsStore((s) => s.fetchFlashcardSets)
-    const flashcardSets = useFlashcardSetsStore((s) => s.flashcardSets)
-    const count = useFlashcardSetsStore((s) => s.count)
-
+export default function TaskList() {
+    const fetchTasks = useTasksStore((s) => s.fetchTasks)
     const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
     const subjects = useSubjectStore((s) => s.subjects)
+    const tasks = useTasksStore((s) => s.tasks)
+    const count = useTasksStore((s) => s.count)
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [pageLinks, setPageLinks] = useState([])
@@ -23,6 +21,7 @@ export default function CardList() {
     const s = searchParams.get("s") || ""
 
     const axiosPrivate = useAxiosPrivate()
+    const location = useLocation()
 
     const createPages = (min, max, current) => {
         const result = [current]
@@ -47,7 +46,7 @@ export default function CardList() {
     }
 
     useEffect(() => {
-        fetchFlashcardSets(axiosPrivate, location, p, s)
+        fetchTasks(axiosPrivate, location, p, s)
         fetchSubjects(axiosPrivate, location)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [p, s])
@@ -65,14 +64,14 @@ export default function CardList() {
 
     return (
         <section className="container">
-            <h2>Don't practice until you get it right. <br /> Practice until you can't get it wrong.</h2>
+            <h2>Maturity is not by age, but by the acceptance of your responsibilities:</h2>
 
             <label>
                 Pick a subject to filter by:
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
                     {subjects.map((subject) => (
-                        <option key={uuidv4()} value={subject}>
+                        <option key={subject} value={subject}>
                             {subject}
                         </option>
                     ))}
@@ -80,9 +79,9 @@ export default function CardList() {
             </label>
 
             <ul>
-                {flashcardSets?.length
-                    ? flashcardSets.map(card => <CardSet key={card._id} card={card} axiosPrivate={axiosPrivate} />)
-                    : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
+                {tasks?.length
+                    ? tasks.map(task => <Task key={task._id} task={task} />)
+                    : <p>No tasks, enjoy the time for yourself <Coffee /></p>
                 }
             </ul>
             <ul className="container-h">
@@ -93,8 +92,6 @@ export default function CardList() {
                     : <></>
                 }
             </ul>
-
-            <button className="btn" onClick={() => { console.log(flashcardSets) }}>Dump flashcardSets</button>
         </section>
     )
 }
