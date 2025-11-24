@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react"
 import { useFlashcardStore } from "../../store/flashcardStore"
 import { useState } from "react"
 import { useSubjectStore } from "../../store/subjectsStore"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 
 export default function SaveOption({ setErrMsg }) {
@@ -13,6 +13,7 @@ export default function SaveOption({ setErrMsg }) {
 
     const location = useLocation()
     const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
 
     const [selected, setSelected] = useState('')
     const [picking, setPicking] = useState(true)
@@ -22,7 +23,7 @@ export default function SaveOption({ setErrMsg }) {
     const { flashcardId } = useParams()
 
     useState(() => {
-        fetchSubjects(axiosPrivate, location)
+        fetchSubjects(axiosPrivate, location, navigate)
     }, [])
 
     const save = async (e) => {

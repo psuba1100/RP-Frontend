@@ -3,7 +3,7 @@ import { create } from 'zustand'
 export const useFlashcardSetsStore = create((set) => ({
     flashcardSets: [],
     count: 0,
-    fetchFlashcardSets: async (axiosPrivate, location, p, s) => {
+    fetchFlashcardSets: async (axiosPrivate, location, navigate, p, s) => {
         try {
             const response = await axiosPrivate.get('u/flashcards',
                 {

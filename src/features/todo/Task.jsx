@@ -1,6 +1,6 @@
 import { CircleCheckBig } from "lucide-react";
 import { useAuthStore } from "../../store/authStore";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTasksStore } from "../../store/tasksStore";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
@@ -10,6 +10,7 @@ export default function Task({ task }) {
     const fetchTasks = useTasksStore((s) => s.fetchTasks)
     const [searchParams, setSearchParams] = useSearchParams();
     const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
 
     const datum = new Date(task.dueDate).toLocaleDateString('en-GB', {
         day: 'numeric',
@@ -29,7 +30,7 @@ export default function Task({ task }) {
                 }
             })
 
-            fetchTasks(axiosPrivate, location, p, s)
+            fetchTasks(axiosPrivate, location, navigate, p, s)
         } catch (err) {
             console.log(err)
             const status = err?.response?.status;

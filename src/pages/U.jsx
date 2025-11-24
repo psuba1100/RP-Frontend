@@ -13,7 +13,7 @@ export default function U() {
   const location = useLocation()
 
   useEffect(() => {
-    fetchTasks(axiosPrivate, location)
+    fetchTasks(axiosPrivate, location, navigate)
   }, [])
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function U() {
           <h1 className='t-10'>I Cast: Academic Weapon</h1>
         </div>
         <aside className='container g-2'>
-          <button className='btn btn-v'><BookType />Your study hub</button>
+          <button className='btn btn-v' onClick={() => navigate('/u/hub')}><BookType />Your study hub</button>
           <button className='btn btn-v' onClick={() => navigate('/u/flashcards')}><StickyNote /> Your flashcard library</button>
           <button className='btn btn-v' onClick={() => navigate('/u/tasks')}><SquareCheckBig /> Your upcoming challanges</button>
         </aside>

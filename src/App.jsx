@@ -11,6 +11,7 @@ import CreateFlashcard from './pages/CreateFlashcard';
 import Flashcards from './pages/Flashcards';
 import Flashcard from './pages/Flashcard';
 import FlashcardLayout from './components/layouts/FlashcardLayout';
+import Hub from './pages/Hub';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
             <Route path='flashcard' element={<FlashcardLayout />} >
               <Route path=':flashcardId' index element={<Flashcard />} />
             </Route>
-            <Route path='utilities' />
+            <Route path='hub' index element={<Hub />} />
             <Route path='flashcards' index element={<Flashcards />} />
             <Route path='tasks' index element={<Tasks />} />
             <Route path='create' index element={<CreateFlashcard />} />

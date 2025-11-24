@@ -5,6 +5,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 export default function FlashcardItem({ id, card }) {
     const { removeCard, updateCard } = useNewFlashcardStore();
+    const cards = useNewFlashcardStore((s) => s.cards)
     const axiosPrivate = useAxiosPrivate()
     const navigate = useNavigate()
     const location = useLocation()
@@ -18,17 +19,24 @@ export default function FlashcardItem({ id, card }) {
 
             updateCard(id, side, "image", response.data.filename);
         } catch (err) {
-            console.log(err)
-            navigate('/login', { state: { from: location }, replace: true })
+            console.error(err)
+            const status = err?.response?.status;
+            const message = err?.response?.data?.message || err?.message || "Unknown error";
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
+            }
         }
     };
 
     const deleteImage = async (side) => {
-        const filename = card[side].image;
+        const filename = card[side]?.image;
         if (!filename) return;
 
         try {
             await axiosPrivate.delete('/r/image', { data: { imgName: filename } });
+            console.log(cards[id][side])
             updateCard(id, side, "image", "");
         } catch (err) {
             if (err.response && err.response.status === 404) {
@@ -101,7 +109,15 @@ export default function FlashcardItem({ id, card }) {
                 )}
             </div>
 
-            <button onClick={() => removeCard(id)}>Delete Card</button>
+            <button onClick={async () => {
+                const frontImg = card.front?.image;
+                const backImg = card.back?.image;
+
+                if (frontImg) await deleteImage("front");
+                if (backImg) await deleteImage("back");
+
+                removeCard(id);
+            }}>Delete Card</button>
         </div>
     );
 }

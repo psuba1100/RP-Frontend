@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { useFlashcardStore } from "../store/flashcardStore"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import { useEffect, useState } from "react"
@@ -12,6 +12,7 @@ export default function Flashcard() {
 
     const axiosPrivate = useAxiosPrivate()
     const location = useLocation()
+    const navigate = useNavigate()
 
     const { flashcardId } = useParams()
 
@@ -19,7 +20,7 @@ export default function Flashcard() {
     const [errMsg, setErrMsg] = useState('')
 
     useEffect(() => {
-        setErrMsg(fetchFlashcard(axiosPrivate, location, flashcardId))
+        setErrMsg(fetchFlashcard(axiosPrivate, location, navigate, flashcardId))
     }, [])
 
     useEffect(() => {

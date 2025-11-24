@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 import Modal from "../components/utility/Modal";
 import TaskList from "../features/todo/TaskList";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useSubjectStore } from "../store/subjectsStore";
 import { useTasksStore } from "../store/tasksStore";
@@ -21,6 +21,7 @@ export default function Tasks() {
 
     const location = useLocation()
     const axiosPrivate = useAxiosPrivate()
+    const navigate = useNavigate()
 
     const createTask = async (e) => {
         e.preventDefault()
@@ -41,7 +42,7 @@ export default function Tasks() {
             setTaskDueDate('')
 
             setErrMsg(response.data.message)
-            fetchTasks(axiosPrivate, location)
+            fetchTasks(axiosPrivate, location, navigate)
         } catch (err) {
             console.log(err)
             const status = err?.response?.status;
@@ -59,7 +60,7 @@ export default function Tasks() {
     return (
         <main className="container">
             <p className="err">{errMsg}</p>
-            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location) }}><Plus /> Add new task</button>
+            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Plus /> Add new task</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
                     <form onSubmit={createTask}>

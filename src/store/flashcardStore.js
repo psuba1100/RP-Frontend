@@ -6,7 +6,7 @@ export const useFlashcardStore = create((set) => ({
     numberOfQuestions: 0,
     questionNumber: 1,
     shuffleVersion: 0,
-    fetchFlashcard: async (axiosPrivate, location, flashcardId) => {
+    fetchFlashcard: async (axiosPrivate, location, navigate, flashcardId) => {
         try {
             const response = await axiosPrivate.get(`r/flashcard/${flashcardId}`,)
             set({

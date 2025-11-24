@@ -4,7 +4,7 @@ const SUBJECTS_URL = '/u/subject'
 
 export const useSubjectStore = create((set) => ({
     subjects: [],
-    fetchSubjects: async (axiosPrivate, location) => {
+    fetchSubjects: async (axiosPrivate, location, navigate) => {
         try {
             const response = await axiosPrivate.get(SUBJECTS_URL)
             set({

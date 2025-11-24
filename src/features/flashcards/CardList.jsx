@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { useFlashcardSetsStore } from "../../store/flashcardSetsStore"
 import { useSubjectStore } from "../../store/subjectsStore"
 import { useEffect, useState } from "react"
@@ -23,6 +23,8 @@ export default function CardList() {
     const s = searchParams.get("s") || ""
 
     const axiosPrivate = useAxiosPrivate()
+    const location = useLocation()
+    const navigate = useNavigate()
 
     const createPages = (min, max, current) => {
         const result = [current]
@@ -47,8 +49,8 @@ export default function CardList() {
     }
 
     useEffect(() => {
-        fetchFlashcardSets(axiosPrivate, location, p, s)
-        fetchSubjects(axiosPrivate, location)
+        fetchFlashcardSets(axiosPrivate, location, navigate, p, s)
+        fetchSubjects(axiosPrivate, location, navigate)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [p, s])
 

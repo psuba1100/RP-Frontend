@@ -1,25 +1,52 @@
 import { BrainCircuit, Trash } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom"
+import useAxiosPrivate from "../../hooks/useAxiosPrivate"
+import { useFlashcardSetsStore } from "../../store/flashcardSetsStore"
 
 export default function CardSet({ card }) {
     const navigate = useNavigate()
+    const location = useLocation()
+    const axiosPrivate = useAxiosPrivate()
+    const fetchFlashcardSets = useFlashcardSetsStore((s) => s.fetchFlashcardSets)
+
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const redirectToFlashcard = (e) => {
         navigate(`/u/flashcard/${card.flashcardId}`)
     }
 
-    const deleteReference = (e) => {
+    const deleteReference = async (e) => {
         e.preventDefault()
-        //todo
+
+        try {
+            await axiosPrivate.delete('/u/flashcards', {
+                data: {
+                    flashcardId: card.flashcardId
+                }
+            })
+
+            const p = parseInt(searchParams.get("p"));
+            const s = searchParams.get("s");
+
+            fetchFlashcardSets(axiosPrivate, location, navigate, p, s)
+        } catch (err) {
+            console.error(err)
+            const status = err?.response?.status;
+
+            if (status === 401 || status === 403) {
+                navigate('/login', { state: { from: location }, replace: true });
+                return;
+            }
+        }
     }
     return (
         <li className="container">
             <h3>{card.title}</h3>
             <p>{card.description}</p>
             <p>This set was created by {card.ownerUsername}</p>
-            <button className="btn btn-v" onClick={redirectToFlashcard}><BrainCircuit/> Practice</button>
+            <button className="btn btn-v" onClick={redirectToFlashcard}><BrainCircuit /> Practice</button>
             {card.access != 'owner' ? (
-                <button className="btn btn-v" onClick={deleteReference}><Trash/> Delete reference</button>
+                <button className="btn btn-v" onClick={deleteReference}><Trash /> Delete reference</button>
             ) : (<></>)}
         </li>
     )

@@ -1,4 +1,4 @@
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useSubjectStore } from "../../store/subjectsStore";
 import Task from './Task.jsx'
@@ -22,6 +22,7 @@ export default function TaskList() {
 
     const axiosPrivate = useAxiosPrivate()
     const location = useLocation()
+    const navigate = useNavigate()
 
     const createPages = (min, max, current) => {
         const result = [current]
@@ -46,8 +47,8 @@ export default function TaskList() {
     }
 
     useEffect(() => {
-        fetchTasks(axiosPrivate, location, p, s)
-        fetchSubjects(axiosPrivate, location)
+        fetchTasks(axiosPrivate, location, navigate, p, s)
+        fetchSubjects(axiosPrivate, location, navigate)
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [p, s])
 

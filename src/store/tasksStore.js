@@ -4,7 +4,7 @@ const TASKS_URL = '/u/todo'
 export const useTasksStore = create((set) => ({
     tasks: [],
     count: 0,
-    fetchTasks: async (axiosPrivate, location, p, s) => {
+    fetchTasks: async (axiosPrivate, location, navigate, p, s) => {
         try {
             const response = await axiosPrivate.get(TASKS_URL,
                 {
