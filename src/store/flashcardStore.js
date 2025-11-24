@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 export const useFlashcardStore = create((set) => ({
-    metadata: {saved: false},
+    metadata: { saved: false },
     questions: [{ front: { text: '', image: '' }, back: { text: '', image: '' } }],
     numberOfQuestions: 0,
     questionNumber: 1,
@@ -23,7 +23,7 @@ export const useFlashcardStore = create((set) => ({
                 navigate('/login', { state: { from: location }, replace: true });
             }
 
-            if (status == 404){
+            if (status == 404) {
                 return 'The set you are trying to reach does not exist'
             }
 
@@ -55,5 +55,13 @@ export const useFlashcardStore = create((set) => ({
                 };
             }
         })
+    },
+    setMetadataSave: (save) => {
+        set((state) => ({
+            metadata: {
+                ...state.metadata,
+                saved: save
+            }
+        }));
     }
 }))

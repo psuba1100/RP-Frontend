@@ -6,17 +6,18 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
   height: 100%;
-  background: #1C1C1C;
-  color: #F5E8D8;
+  background: #1c1c1c;
+  color: #f5e8d8;
 }
 
-#root{
+#root {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,9 +26,9 @@ html, body {
 .btn {
   margin-top: 0;
   padding: 0.5rem 1rem;
-  background: #1f2937;        /* dark gray */
-  color: #f3f4f6;             /* light text */
-  border: 1px solid #374151;  /* subtle outline */
+  background: #1f2937; /* dark gray */
+  color: #f3f4f6; /* light text */
+  border: 1px solid #374151; /* subtle outline */
   border-radius: 8px;
   font-size: 16px;
   font-weight: 500;
@@ -41,7 +42,7 @@ html, body {
 }
 
 .btn:hover {
-  background: #272f3f;        /* slightly lighter */
+  background: #272f3f; /* slightly lighter */
   border-color: #4b5563;
 }
 
@@ -61,15 +62,15 @@ html, body {
   padding: 12px 14px;
   font-size: 16px;
   border-radius: 8px;
-  border: 1px solid #374151;   /* dark border */
-  background: #111827;         /* deep dark */
+  border: 1px solid #374151; /* dark border */
+  background: #111827; /* deep dark */
   color: #f3f4f6;
   outline: none;
   transition: 0.2s ease;
 }
 
 .input::placeholder {
-  color: #6b7280;              /* gray placeholder */
+  color: #6b7280; /* gray placeholder */
 }
 
 .input:hover {
@@ -77,18 +78,17 @@ html, body {
 }
 
 .input:focus {
-  border-color: #818cf8;       /* subtle indigo accent */
+  border-color: #818cf8; /* subtle indigo accent */
   box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
   background: #1a2233;
 }
 
-.center{
+.center {
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 1rem;
 }
-
 
 .container {
   display: flex;
@@ -107,16 +107,16 @@ html, body {
   width: 100%;
 }
 
-p{
+p {
   text-align: center;
   margin: 1rem;
 }
 
-svg{
+svg {
   vertical-align: bottom;
 }
 
-.t-10{
+.t-10 {
   max-width: 10ch;
 }
 
@@ -130,15 +130,15 @@ ul {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .modal {
-  background: white;
-  padding: 2rem;
+  background: #1d1d1d;
+  padding: 0.5rem;
   border-radius: 8px;
-  min-width: 300px;
+  width: 50%;
 }
