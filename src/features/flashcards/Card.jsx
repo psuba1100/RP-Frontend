@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { API_URL } from "../../api/config";
 import Modal from "../../components/utility/Modal";
 import { Fullscreen } from "lucide-react";
+import MarkdownRenderer from "../../components/utility/MarkdownRenderer";
 
 export default function Card({ question }) {
     const [flipped, setFlipped] = useState(false);
@@ -28,7 +29,7 @@ export default function Card({ question }) {
             >
                 <div className="flashcard-inner">
                     <div className="flashcard-front">
-                        <p>{question.front.text}</p>
+                        <MarkdownRenderer markdown={question.front.text}/>
                         {question.front?.image
                             ? (<img
                                 src={`${API_URL}/r/image/${question.front.image}`}
@@ -38,8 +39,8 @@ export default function Card({ question }) {
                             : <></>
                         }
                     </div>
-                    <div className="flashcard-back">
-                        <p className="dark">{question.back.text}</p>
+                    <div className="flashcard-back dark">
+                        <MarkdownRenderer markdown={question.back.text}/>
                         {question.back?.image
                             ? (<img
                                 src={`${API_URL}/r/image/${question.back.image}`}

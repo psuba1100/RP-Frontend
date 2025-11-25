@@ -1,4 +1,4 @@
-import { SquarePlus } from "lucide-react"
+import { Send, SquarePlus } from "lucide-react"
 import { v4 as uuidv4 } from 'uuid';
 import { useNewFlashcardStore } from "../store/newFlashcardStore";
 import CreationCard from "../features/flashcards/creationCard";
@@ -7,6 +7,7 @@ import { useSubjectStore } from "../store/subjectsStore";
 import { useState } from "react";
 import Modal from "../components/utility/Modal";
 import { useLocation, useNavigate } from "react-router-dom";
+import TextAssist from "../features/flashcards/TextAssist";
 
 export default function CreateFlashcard() {
     const cards = useNewFlashcardStore((s) => s.cards);
@@ -74,7 +75,7 @@ export default function CreateFlashcard() {
             {Object.entries(cards).map(([id, card]) => (
                 <CreationCard key={id} id={id} card={card} />
             ))}
-            <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}>Dump cards store</button>
+            <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Send/> Questions are done, let's finish!</button>
 
             {open && (
                 <Modal onClose={() => setOpen(false)}>
@@ -114,7 +115,7 @@ export default function CreateFlashcard() {
                     <button className="btn" onClick={() => { setOpen(false) }}>Return to questions</button>
                 </Modal>
             )}
-            <button className="btn" onClick={() => console.log(cards)}>dump</button>
+            <TextAssist/>
         </main>
     )
 }
