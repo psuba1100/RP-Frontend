@@ -1,1 +1,1 @@
-export const API_URL = 'https://192.168.100.77:3500'
+export const API_URL = 'https://api.winkify.review'

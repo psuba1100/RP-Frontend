@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://192.168.100.77:3500'
+const BASE_URL = 'https://api.winkify.review'
 
 export default axios.create({
     baseURL: BASE_URL

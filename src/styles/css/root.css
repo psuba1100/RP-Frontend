@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+body {
+  background-color: #191214;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  height: 100%;
+  color: #FEE7ED;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  background-color: #212830;
+  color: #FEE7ED;
+  margin-top: 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid #423337;
+  /* subtle outline */
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/*CHANGE CLRS*/
+.btn:hover {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  background: #3f4755;
+  border-color: #3f4755;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #EF476F;
+  color: #191214;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #423337;
+  background: #212830;
+  color: #FEE7ED;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input:hover {
+  border-color: #423337;
+}
+
+.input:focus {
+  border-color: #423337;
+  box-shadow: 0 0 0 3px #EF476F;
+  background: #212830;
+}
+
+/*# sourceMappingURL=root.css.map */

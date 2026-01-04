@@ -7,6 +7,7 @@ import './css/root.css'
 import './css/card.css'
 import './css/form.css'
 import './css/u.css'
+import './styles/css/root.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

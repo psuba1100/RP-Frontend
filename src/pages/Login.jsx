@@ -81,7 +81,7 @@ export default function Login() {
                     required
                 />
                 <p>{errMsg}</p>
-                <button type="submit" className="btn">Sign in</button>
+                <button type="submit" className="btn btn-primary">Sign in</button>
             </form>
         </section>
     )
