@@ -3,11 +3,9 @@ import axios from "../api/axios";
 
 export const useAuthStore = create((set) => ({
     username: '',
-    password: '',
     accessToken: '',
     setAuth: (data) => set({
         username: data.username,
-        password: data.password,
         accessToken: data.accessToken
     }),
     refreshToken: async () => {
@@ -16,15 +14,17 @@ export const useAuthStore = create((set) => ({
         })
 
         const accessToken = response.data.accessToken
+        const username = response.data.username
+
         set({
-            accessToken
+            accessToken,
+            username
         })
 
         return accessToken
     },
     clearAuth: () => set({
         username: '',
-        password: '',
         accessToken: ''
     })
 }))

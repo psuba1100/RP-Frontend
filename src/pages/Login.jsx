@@ -37,9 +37,7 @@ export default function Login() {
 
             const accessToken = response?.data?.accessToken
 
-            setAuth({username, password, accessToken})
-
-            console.log({username, password, accessToken})
+            setAuth({username, accessToken})
 
             setUsername('')
             setPassword('')

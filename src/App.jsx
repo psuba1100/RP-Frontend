@@ -12,6 +12,8 @@ import Flashcards from './pages/Flashcards';
 import Flashcard from './pages/Flashcard';
 import FlashcardLayout from './components/layouts/FlashcardLayout';
 import Hub from './pages/Hub';
+import PersistLogin from './components/auth/PersistLogin';
+import P404 from './pages/P404';
 
 function App() {
 
@@ -25,19 +27,24 @@ function App() {
         <Route path='register' index element={<Register />} />
 
         {/*Protected routes*/}
-        <Route element={<RequireAuth />}>
-          <Route path='u' element={<DashLayout />}>
-            <Route index element={<U />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path='u' element={<DashLayout />}>
+              <Route index element={<U />} />
 
-            <Route path='flashcard' element={<FlashcardLayout />} >
-              <Route path=':flashcardId' index element={<Flashcard />} />
+              <Route path='flashcard' element={<FlashcardLayout />} >
+                <Route path=':flashcardId' index element={<Flashcard />} />
+              </Route>
+              <Route path='hub' index element={<Hub />} />
+              <Route path='flashcards' index element={<Flashcards />} />
+              <Route path='tasks' index element={<Tasks />} />
+              <Route path='create' index element={<CreateFlashcard />} />
             </Route>
-            <Route path='hub' index element={<Hub />} />
-            <Route path='flashcards' index element={<Flashcards />} />
-            <Route path='tasks' index element={<Tasks />} />
-            <Route path='create' index element={<CreateFlashcard />} />
           </Route>
         </Route>
+
+        {/*Catch all*/}
+        <Route path='*' element={<P404 />} index/>
       </Route>
     </Routes>
   );

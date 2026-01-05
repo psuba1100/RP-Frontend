@@ -12,10 +12,13 @@ export default function TaskList() {
     const subjects = useSubjectStore((s) => s.subjects)
     const tasks = useTasksStore((s) => s.tasks)
     const count = useTasksStore((s) => s.count)
+    const clearTasksStore = useTasksStore((s) => s.clearTasksStore)
+    const clearSubjectStore = useSubjectStore((s) => s.clearSubjectStore)
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [pageLinks, setPageLinks] = useState([])
     const [selected, setSelected] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
     const p = parseInt(searchParams.get("p")) || 1
     const s = searchParams.get("s") || ""
@@ -46,10 +49,30 @@ export default function TaskList() {
         setPageLinks(result)
     }
 
+    const refetchTasks = async () => {
+        setIsLoading(true)
+        clearSubjectStore()
+        clearTasksStore()
+
+        try {
+            await fetchTasks(axiosPrivate, location, navigate, p, s)
+            await fetchSubjects(axiosPrivate, location, navigate)
+        }
+        catch (err) {
+            console.error(err)
+        }
+        finally {
+            setIsLoading(false)
+        }
+
+    }
+
     useEffect(() => {
-        fetchTasks(axiosPrivate, location, navigate, p, s)
-        fetchSubjects(axiosPrivate, location, navigate)
-        createPages(1, Math.floor(count / 10) + 1, parseInt(p))
+        refetchTasks()
+    }, [])
+
+    useEffect(() => {
+        refetchTasks()
     }, [p, s])
 
     const changeSubject = (e) => {
@@ -79,12 +102,18 @@ export default function TaskList() {
                 </select>
             </label>
 
-            <ul>
-                {tasks?.length
-                    ? tasks.map(task => <Task key={task._id} task={task} />)
-                    : <p>No tasks, enjoy the time for yourself <Coffee /></p>
-                }
-            </ul>
+            {isLoading
+                ? <p>Loading...</p>
+                : (
+                    <ul>
+                        {tasks?.length
+                            ? tasks.map(task => <Task key={task._id} task={task} />)
+                            : <p>No tasks, enjoy the time for yourself <Coffee /></p>
+                        }
+                    </ul>
+                )
+            }
+
             <ul className="container-h">
                 {pageLinks?.length
                     ? pageLinks.map((link) => link != p

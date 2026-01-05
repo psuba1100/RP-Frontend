@@ -27,8 +27,11 @@ export const useSubjectStore = create((set) => ({
         })),
 
     // REMOVE SUBJECT
-    removeSubject: (subject) =>
-        set((state) => ({
-            subjects: state.subjects.filter((s) => s !== subject)
-        })),
+    removeSubject: (subject) => set((state) => ({
+        subjects: state.subjects.filter((s) => s !== subject)
+    })),
+
+    clearSubjectStore: () => set({
+        subjects: []
+    })
 }));

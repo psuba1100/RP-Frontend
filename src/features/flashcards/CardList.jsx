@@ -11,9 +11,11 @@ export default function CardList() {
     const fetchFlashcardSets = useFlashcardSetsStore((s) => s.fetchFlashcardSets)
     const flashcardSets = useFlashcardSetsStore((s) => s.flashcardSets)
     const count = useFlashcardSetsStore((s) => s.count)
+    const clearFlashcardSetsStore = useFlashcardSetsStore((s) => s.clearFlashcardSetsStore)
 
     const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
     const subjects = useSubjectStore((s) => s.subjects)
+    const clearSubjectStore = useSubjectStore((s) => s.clearSubjectStore)
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [pageLinks, setPageLinks] = useState([])
@@ -25,6 +27,25 @@ export default function CardList() {
     const axiosPrivate = useAxiosPrivate()
     const location = useLocation()
     const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    const refetchSets = async () => {
+        setIsLoading(true)
+        clearFlashcardSetsStore()
+        clearSubjectStore()
+
+        try {
+            await fetchFlashcardSets(axiosPrivate, location, navigate, p, s)
+            await fetchSubjects(axiosPrivate, location, navigate)
+        }
+        catch (err) {
+            console.error(err)
+        }
+        finally {
+            setIsLoading(false)
+        }
+    }
 
     const createPages = (min, max, current) => {
         const result = [current]
@@ -49,9 +70,7 @@ export default function CardList() {
     }
 
     useEffect(() => {
-        fetchFlashcardSets(axiosPrivate, location, navigate, p, s)
-        fetchSubjects(axiosPrivate, location, navigate)
-        createPages(1, Math.floor(count / 10) + 1, parseInt(p))
+        refetchSets()
     }, [p, s])
 
     const changeSubject = (e) => {
@@ -64,6 +83,10 @@ export default function CardList() {
     useEffect(() => {
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [count])
+
+    useEffect(() => {
+        console.log(isLoading)
+    }, [isLoading])
 
     return (
         <section className="container">
@@ -81,12 +104,18 @@ export default function CardList() {
                 </select>
             </label>
 
-            <ul>
-                {flashcardSets?.length
-                    ? flashcardSets.map(card => <CardSet key={card._id} card={card} />)
-                    : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
-                }
-            </ul>
+            {isLoading
+                ? <p>Loading...</p>
+                : (
+                    <ul>
+                        {flashcardSets?.length
+                            ? flashcardSets.map(card => <CardSet key={card._id} card={card} />)
+                            : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
+                        }
+                    </ul>
+                )
+            }
+
             <ul className="container-h">
                 {pageLinks?.length
                     ? pageLinks.map((link) => link != p
@@ -95,8 +124,6 @@ export default function CardList() {
                     : <></>
                 }
             </ul>
-
-            <button className="btn" onClick={() => { console.log(flashcardSets) }}>Dump flashcardSets</button>
         </section>
     )
 }

@@ -25,5 +25,9 @@ export const useFlashcardSetsStore = create((set) => ({
                 navigate('/login', { state: { from: location }, replace: true });
             }
         }
-    }
+    },
+    clearFlashcardSetsStore: () => set({
+        flashcardSets: [],
+        count: 0,
+    })
 }))

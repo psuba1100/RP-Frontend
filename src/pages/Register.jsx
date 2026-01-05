@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
+import { useAuthStore } from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     const PWD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~])[A-Za-z\d!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]{8,32}$/;
     const REGISTER_URL = '/users';
 
+    const navigate = useNavigate()
+    const setAuth = useAuthStore((s) => s.setAuth)
+    
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
@@ -51,7 +56,11 @@ export default function Register() {
                 }
             );
 
-            console.log(response?.data?.accessToken);
+            const accessToken = response.data.accessToken
+
+            setAuth({username, accessToken})
+
+            navigate('/u', {replace: true})
 
             setUsername('')
             setPassword('')

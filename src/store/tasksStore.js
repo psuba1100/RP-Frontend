@@ -26,5 +26,9 @@ export const useTasksStore = create((set) => ({
                 navigate('/login', { state: { from: location }, replace: true });
             }
         }
-    }
+    },
+    clearTasksStore: () => set({
+        tasks: [],
+        count: 1
+    })
 }))
