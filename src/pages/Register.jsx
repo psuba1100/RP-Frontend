@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { useGlobalSettingsStore } from "../store/globalSettingsStorage";
 
 export default function Register() {
     const PWD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~])[A-Za-z\d!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]{8,32}$/;
@@ -9,12 +10,14 @@ export default function Register() {
 
     const navigate = useNavigate()
     const setAuth = useAuthStore((s) => s.setAuth)
-    
+    const setTrustThisDevice = useGlobalSettingsStore((s) => s.setTrustThisDevice)
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [validPassword, setValidPassword] = useState(false)
     const [passwordMatch, setPasswordMatch] = useState('')
     const [passwordMatchValid, setPasswordMatchValid] = useState(false)
+    const [trustDevice, setTrustDevice] = useState(false)
     const [errMsg, setErrMsg] = useState('')
 
     useEffect(() => {
@@ -58,9 +61,9 @@ export default function Register() {
 
             const accessToken = response.data.accessToken
 
-            setAuth({username, accessToken})
+            setAuth({ username, accessToken })
 
-            navigate('/u', {replace: true})
+            navigate('/u', { replace: true })
 
             setUsername('')
             setPassword('')
@@ -75,6 +78,10 @@ export default function Register() {
             }
         }
     }
+
+    useEffect(() => {
+        setTrustThisDevice(trustDevice)
+    }, [trustDevice])
 
     return (
         <div className="container">
@@ -116,6 +123,16 @@ export default function Register() {
                     value={passwordMatch}
                     required
                 />
+                <div className="horisontalBlock">
+                    <input
+                        className="checkbox"
+                        type="checkbox"
+                        id="trustThisDevice"
+                        checked={trustDevice}
+                        onChange={(e) => setTrustDevice(prev => !prev)}
+                    />
+                    <label htmlFor="trustThisDevice">Trust this device after loggin in?</label>
+                </div>
                 <p>{errMsg}</p>
                 <button disabled={!validPassword || !passwordMatchValid ? true : false} className="btn" type="submit">Sign Up</button>
             </form>

@@ -13,8 +13,8 @@ export const useAuthStore = create((set) => ({
             withCredentials: true
         })
 
-        const accessToken = response.data.accessToken
-        const username = response.data.username
+        const accessToken = response?.data?.accessToken
+        const username = response?.data?.username
 
         set({
             accessToken,
@@ -23,7 +23,7 @@ export const useAuthStore = create((set) => ({
 
         return accessToken
     },
-    clearAuth: () => set({
+    clearAuthStore: () => set({
         username: '',
         accessToken: ''
     })

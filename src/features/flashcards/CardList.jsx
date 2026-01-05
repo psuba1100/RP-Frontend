@@ -31,6 +31,7 @@ export default function CardList() {
     const [isLoading, setIsLoading] = useState(true)
 
     const refetchSets = async () => {
+        let isMounted = true
         setIsLoading(true)
         clearFlashcardSetsStore()
         clearSubjectStore()
@@ -43,8 +44,10 @@ export default function CardList() {
             console.error(err)
         }
         finally {
-            setIsLoading(false)
+            isMounted && setIsLoading(false)
         }
+
+        return () => isMounted = false
     }
 
     const createPages = (min, max, current) => {

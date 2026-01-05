@@ -7,18 +7,21 @@ const LOGOUT_URL = '/auth/logout'
 
 export default function DashLayout() {
   const username = useAuthStore((s) => s.username)
+  const clearAuthStore = useAuthStore((s) => s.clearAuthStore)
   const navigate = useNavigate()
 
   const handleLogout = async (e) => {
     e.preventDefault()
     try {
       const response = await axios.post(LOGOUT_URL,
+        {},
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       )
-
+      console.log(response)
+      clearAuthStore()
       navigate('/login')
     } catch (err) {
       console.error(err)

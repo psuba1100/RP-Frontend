@@ -50,6 +50,7 @@ export default function TaskList() {
     }
 
     const refetchTasks = async () => {
+        let isMounted = true
         setIsLoading(true)
         clearSubjectStore()
         clearTasksStore()
@@ -62,9 +63,10 @@ export default function TaskList() {
             console.error(err)
         }
         finally {
-            setIsLoading(false)
+            isMounted && setIsLoading(false)
         }
 
+        return () => isMounted = false
     }
 
     useEffect(() => {
