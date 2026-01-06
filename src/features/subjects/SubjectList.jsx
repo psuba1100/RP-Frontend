@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { useSubjectStore } from "../../store/subjectsStore"
 import { useEffect, useState } from "react"
-import { Coffee, SquarePlus } from "lucide-react"
+import { Coffee, Plus, SquarePlus } from "lucide-react"
 import SubjectElement from "./SubjectElement"
 
 export default function SubjectList() {
@@ -46,19 +46,20 @@ export default function SubjectList() {
         }
     }
     return (
-        <section className="container">
+        <section className="block vertical item">
             <p>{errMsg}</p>
-            <div className="container-h">
+            <div className="block">
                 <label htmlFor="newSubject"></label>
                 <input
+                placeholder="Subject name"
                     type="text"
                     id="newSubject"
                     className="input"
                     value={newSubject}
                     onChange={(e) => setNewSubject(e.target.value)} />
-                <button className="btn" onClick={createSubject}><SquarePlus /> Add</button>
+                <button className="btn" onClick={createSubject}><Plus /> Add</button>
             </div>
-            <ul>
+            <ul className="block vertical g-05">
                 {subjects?.length
                     ? subjects.map((subject) => <SubjectElement key={subject} subject={subject} setErrMsg={setErrMsg}/>)
                     : <p><Coffee/> No subjects yet. Why don't you add some?</p>

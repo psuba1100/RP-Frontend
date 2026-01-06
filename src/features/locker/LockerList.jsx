@@ -53,29 +53,28 @@ export default function LockerList() {
     }
 
     return (
-        <section className="container">
+        <section className="block vertical item stretch">
             <p>{errMsg}</p>
             <p>{changes ? 'Careful, you have unsaved changes!' : ''}</p>
-            <section className="container-h">
-                <label htmlFor="newItem"></label>
+            <section className="block">
                 <input
                     type="text"
-                    id="newItem"
+                    placeholder="Item name"
                     className="input"
                     value={newItem}
                     onChange={(e) => { setNewItem(e.target.value) }} />
                 <button className="btn" onClick={() => { addItem(newItem, true, setErrMsg); setNewItem('') }}><Plus /></button>
                 <button className="btn" onClick={save}><Save /></button>
             </section>
-            <section className="container-h">
-                <ul className="container">
+            <section className="block stretch h-elements-top">
+                <ul className="block vertical item">
                     <h3>In locker</h3>
                     {items.length
                         ? items.map((item) => item.inLocker && <LockerElement key={item.item} item={item.item} />)
                         : <></>
                     }
                 </ul>
-                <ul className="container">
+                <ul className="block vertical item">
                     <h3>Outside locker</h3>
                     {items.length
                         ? items.map((item) => !item.inLocker && <LockerElement key={item.item} item={item.item} />)

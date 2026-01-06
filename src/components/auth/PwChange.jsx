@@ -50,12 +50,12 @@ export default function PwChange() {
 
     return (
         <>
-            <button className="btn btn-v" onClick={() => setOpen(true)}><KeyRound /> Wish to change a password?</button>
+            <button className="btn btn-v" onClick={() => setOpen(true)}><KeyRound />Change password</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
-                    <div>
+                    <div className="block vertical">
                         <p>{errMsg}</p>
-                        <form onSubmit={changePassword}>
+                        <form onSubmit={changePassword} className="block vertical">
                             <label htmlFor="password">Enter your existing password</label>
                             <input
                                 id="password"
@@ -66,7 +66,7 @@ export default function PwChange() {
                                 onChange={(e) => { setPassword(e.target.value) }}
                             />
 
-                            <label htmlFor="newPassword">Enter new password</label>
+                            <label htmlFor="newPassword" className="mt">Enter new password</label>
                             <input
                                 id="newPassword"
                                 type="password"
@@ -76,7 +76,7 @@ export default function PwChange() {
                                 onChange={(e) => { setNewPassword(e.target.value); PWD_REGEX.test(e.target.value) ? setErrMsg('') : setErrMsg('New password is invalid') }}
                             />
 
-                            <label htmlFor="newPasswordRepeat">Enter new password again</label>
+                            <label htmlFor="newPasswordRepeat" className="mt">Enter new password again</label>
                             <input
                                 id="newPasswordRepeat"
                                 type="password"
@@ -85,9 +85,12 @@ export default function PwChange() {
                                 className="input"
                                 onChange={(e) => { setNewPasswordRepeat(e.target.value); newPassword == newPasswordRepeat ? setErrMsg('') : setErrMsg('Passwords must match') }}
                             />
-                            <button type="submit" className="btn">Change password</button>
+                            <div className="block horizontal-priority mt">
+                                <button type="submit" className="btn btn-primary">Change password</button>
+                                <button className="btn m" onClick={() => { setOpen(false); setPassword(''); setNewPassword(''); setNewPasswordRepeat(''); setErrMsg('') }}>Cancel</button>
+                            </div>
                         </form>
-                        <button className="btn" onClick={() => { setOpen(false); setPassword(''); setNewPassword(''); setNewPasswordRepeat(''); setErrMsg('') }}>Cancel</button>
+                        
                     </div>
                 </Modal>
             )}

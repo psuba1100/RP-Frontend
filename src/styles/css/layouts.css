@@ -60,6 +60,15 @@
   align-items: flex-start;
 }
 
+.hp-elements-top {
+  align-items: flex-start;
+}
+@media (max-width: 768px) {
+  .hp-elements-top {
+    align-items: center;
+  }
+}
+
 .h-elements-left {
   justify-content: flex-start;
 }
@@ -84,6 +93,10 @@
   margin-top: 2rem;
 }
 
+.mt-4 {
+  margin-top: 4rem;
+}
+
 .w {
   width: 60%;
 }
@@ -98,6 +111,15 @@
 
 .g-2 {
   gap: 2rem;
+}
+
+.g-05 {
+  gap: 0.5rem;
+}
+
+.m0 {
+  margin: 0;
+  padding: 0;
 }
 
 nav,

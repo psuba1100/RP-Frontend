@@ -60,15 +60,23 @@
     align-items: flex-start;
 }
 
-.h-elements-left{
+.hp-elements-top {
+    align-items: flex-start;
+
+    @media (max-width: breakpoints.$phone) {
+        align-items: center;
+    }
+}
+
+.h-elements-left {
     justify-content: flex-start;
 }
 
-.elements-left{
+.elements-left {
     align-items: flex-start;
 }
 
-.h-elements-right{
+.h-elements-right {
     justify-content: flex-end;
 }
 
@@ -82,6 +90,10 @@
 
 .mt {
     margin-top: 2rem;
+}
+
+.mt-4 {
+    margin-top: 4rem;
 }
 
 .w {
@@ -98,6 +110,15 @@
 
 .g-2 {
     gap: 2rem;
+}
+
+.g-05{
+    gap: 0.5rem;
+}
+
+.m0{
+    margin: 0;
+    padding: 0;
 }
 
 nav,
@@ -140,10 +161,10 @@ footer {
     }
 }
 
-.stretch{
+.stretch {
     align-self: stretch;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
