@@ -30,7 +30,7 @@ export default function Flashcard() {
     }, [questionNumber, questions])
 
     return (
-        <div className="container">
+        <div className="main vertical">
             <p className="err">{errMsg}</p>
             <Card question={currentQuestion} key={`${shuffleVersion}-${questionNumber}`}/>
         </div>

@@ -22,11 +22,11 @@ export default function ShareOption() {
         }
     }
     return (
-        <div className="container">
+        <div className="block vertical">
             <h3>Share via QR code:</h3>
             <QRCodeSVG value={currentUrl} />
             <p>Or share the link:</p>
-            <button className="btn" onClick={copyLink}><Copy />{copyMessage}</button>
+            <button className="btn btn-primary" onClick={copyLink}><Copy />{copyMessage}</button>
         </div>
 
     )

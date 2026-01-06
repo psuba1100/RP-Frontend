@@ -15,13 +15,13 @@ export default function SetOptions() {
 
     return (
         <>
-            <button className="btn" onClick={(e) => { setOpen(true) }}> <Ellipsis /> Options</button>
+            <button className="btn" onClick={(e) => { setOpen(true) }}> <Ellipsis /> <span className="phone-hidden">Options</span></button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
-                    <div className="container">
+                    <div className="block vertical">
                         <p className="err">{errMrg}</p>
-                        <section className="container-h">
-                            <section className="container">
+                        <section className="block stretch">
+                            <section className="block vertical item">
                                 <button className="btn" disabled={operation == 'share'} onClick={() => setOperation('share')}><Share2 /> Share</button>
                                 <button className="btn" disabled={operation == 'save'} onClick={() => setOperation('save')}><BookMarked /> Save</button>
                                 {metadata.relation == 'owner'
@@ -29,7 +29,7 @@ export default function SetOptions() {
                                     : <></>
                                 }
                             </section>
-                            <section className="container">
+                            <section className="item h-elements-right">
                                 {
                                     operation == 'share' && <ShareOption />
                                 }
@@ -42,7 +42,7 @@ export default function SetOptions() {
 
                             </section>
                         </section>
-                        <button className="btn" onClick={() => { setOpen(false) }}>return</button>
+                        <button className="btn mt" onClick={() => { setOpen(false) }}>Close</button>
                     </div>
                 </Modal>
             )}

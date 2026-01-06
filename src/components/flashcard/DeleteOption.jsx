@@ -39,14 +39,21 @@ export default function DeleteOption({ setErrMsg }) {
     }
 
     return (
-        <div className="container">
-            <h2><TriangleAlert />ATTENTION</h2>
+        <div className="block vertical text-center">
+            <h2><TriangleAlert />{' ATTENTION'}</h2>
             <p>You are about to delete this flashcard set. This action cannot be undone. All images within the set will also be permanently deleted. Once removed, any users who have saved this set in their library will no longer have access to it. Do you want to continue?</p>
-            <label className="container-h">
-                <input type="checkbox" checked={agree} onChange={() => setAgree((prev) => !prev)} />
-                I know what I am doing and I wish to proceed.
-            </label>
-            <button className="btn" disabled={!agree} onClick={remove}><Trash /> Delete permanently</button>
+            <div className="block">
+                <input
+                    className="checkbox mt itemStart"
+                    type="checkbox"
+                    id="trustThisDevice"
+                    checked={agree}
+                    onChange={(e) => setAgree(prev => !prev)}
+                />
+                <label htmlFor="trustThisDevice" className="mt itemStart">I know what I am doing and I wish to proceed.</label>
+            </div>
+
+            <button className="btn btn-primary mt" disabled={!agree} onClick={remove}><Trash /> Delete permanently</button>
         </div>
     )
 }

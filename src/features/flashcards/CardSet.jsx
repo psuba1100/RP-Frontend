@@ -44,10 +44,12 @@ export default function CardSet({ card }) {
             <h3>{card.title}</h3>
             <p><em>Created by {card.ownerUsername}</em></p>
             <p>{card.description}</p>
-            <button className="btn btn-v" onClick={redirectToFlashcard}><BrainCircuit /> Practice</button>
-            {card.access != 'owner' ? (
-                <button className="btn btn-v" onClick={deleteReference}><Trash /> Delete reference</button>
-            ) : (<></>)}
+            <div className="block horizontal-priority g-2">
+                <button className="btn btn-primary" onClick={redirectToFlashcard}><BrainCircuit /> Practice</button>
+                {card.access != 'owner' ? (
+                    <button className="btn" onClick={deleteReference}><Trash /> Delete reference</button>
+                ) : (<></>)}
+            </div>
         </li>
     )
 }

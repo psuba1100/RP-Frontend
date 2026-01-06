@@ -66,6 +66,11 @@ export default function SaveOption({ setErrMsg }) {
                 return;
             }
 
+            if (status === 409) {
+                setMetadataSave(true)
+                setSaved(true)
+            }
+
             setErrMsg(message)
         }
     }
@@ -93,20 +98,25 @@ export default function SaveOption({ setErrMsg }) {
                 return;
             }
 
+            if (status === 409) {
+                setMetadataSave(false)
+                setSaved(false)
+            }
+
             setErrMsg(message)
         }
     }
 
     return (
-        <div className="container">
+        <div className="block vertical">
             {metadata.relation == 'owner'
-                ? <p>This set is stored in your library and cannot be removed since you are the owner. You can, however, delete the flashcard set entirely.</p>
+                ? <p className="text-center">This set is stored in your library and cannot be removed since you are the owner. You can, however, delete the flashcard set entirely.</p>
                 : (saved
                     ? (
                         <>
-                            <label>
+                            <label className="block vertical text-center">
                                 This set is already in your library. Do you want to remove it?
-                                <button className="btn" onClick={remove}><X /> Remove from library</button>
+                                <button className="btn btn-primary mt" onClick={remove}><X /> Remove from library</button>
                             </label>
                         </>
                     )
@@ -115,7 +125,7 @@ export default function SaveOption({ setErrMsg }) {
                             {
                                 picking
                                     ? (
-                                        <label>
+                                        <label className="block vertical text-center">
                                             Pick a subject to store this set under:
                                             <select value={selected} onChange={(e) => setSelected(e.target.value)}>
                                                 <option value="">— None —</option>
@@ -128,19 +138,20 @@ export default function SaveOption({ setErrMsg }) {
                                         </label>
                                     )
                                     : (
-                                        <label>
+                                        <label className="block vertical text-center">
                                             Name a new subject you want to store this set under:
                                             <input
                                                 type="text"
                                                 className="input"
+                                                style={{ maxWidth: '90%' }}
                                                 value={newSubject}
                                                 onChange={(e) => setNewSubject(e.target.value)}
                                             ></input>
                                         </label>
                                     )
                             }
-                            <button className="btn" onClick={() => setPicking((prev) => !prev)}>{picking ? 'Create new subject instead' : 'Pick existing subject instead'}</button>
-                            <button className="btn" onClick={save}><Check />Add to library</button>
+                            <button className="btn mt" onClick={() => setPicking((prev) => !prev)}>{picking ? 'Create new subject instead' : 'Pick existing subject instead'}</button>
+                            <button className="btn btn-primary mt" onClick={save}><Check />Add to library</button>
                         </>
                     )
                 )

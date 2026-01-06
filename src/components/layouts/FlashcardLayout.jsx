@@ -11,17 +11,17 @@ export default function FlashcardLayout() {
     const shuffle = useFlashcardStore((s) => s.shuffle)
 
     return (
-        <section className="container main">
+        <>
             <Outlet />
-            <footer>
-                <div className="element">
+            <footer className="">
+                <div className="item block h-elements-left">
                     {`${metadata.title} created by ${metadata.relation == 'owner' ? 'you' : metadata.owner}`}
                 </div>
-                <div className="container-h element">
+                <div className="block item">
                     <button className="btn" onClick={(e) => { if (questionNumber > 1) setQuestionNumber(questionNumber - 1) }}><ArrowBigLeft /></button>
                     <input
                         type="number"
-                        className="input"
+                        className="input phone-hidden m"
                         value={questionNumber}
                         onChange={(e) => {
                             let val = e.target.value;
@@ -46,16 +46,16 @@ export default function FlashcardLayout() {
                         min={1}
                         max={numberOfQuestions}
                     />
-                    <div>{`/${numberOfQuestions}`}</div>
+                    <div className="phone-hidden m">{`/${numberOfQuestions}`}</div>
                     <button className="btn" onClick={(e) => { if (questionNumber < numberOfQuestions) setQuestionNumber(questionNumber + 1) }}><ArrowBigRight /></button>
                 </div>
-                <div className="container-h element">
+                <div className="block item h-elements-right">
                     <button className="btn" onClick={(e) => {
                         shuffle()
                     }}><Dices /></button>
                     <SetOptions />
                 </div>
             </footer>
-        </section>
+        </>
     )
 }

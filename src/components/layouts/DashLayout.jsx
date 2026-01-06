@@ -12,38 +12,6 @@ export default function DashLayout() {
   const username = useAuthStore((s) => s.username)
   const clearAuthStore = useAuthStore((s) => s.clearAuthStore)
   const navigate = useNavigate()
-  const fetchTasks = useTasksStore((s) => s.fetchTasks)
-  const tasks = useTasksStore((s) => s.tasks)
-  const axiosPrivate = useAxiosPrivate()
-  const location = useLocation()
-  const [task, setTask] = useState('')
-
-  useEffect(() => {
-    fetchTasks(axiosPrivate, location, navigate)
-  }, [])
-
-  useEffect(() => {
-    const firstTask = tasks[0]
-    if (firstTask) {
-      const datum = new Date(firstTask.dueDate).toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      });
-
-      setTask(
-        <>
-          {firstTask.title} from {firstTask.subject} due {datum}
-        </>
-      );
-    } else {
-      setTask(
-        <>
-          to take a break <Coffee />
-        </>
-      );
-    }
-  }, [tasks])
 
   const handleLogout = async (e) => {
     e.preventDefault()
@@ -73,9 +41,6 @@ export default function DashLayout() {
         </div>
       </nav>
       <Outlet />
-      <footer className="block">
-        {task}
-      </footer>
     </>
   )
 }

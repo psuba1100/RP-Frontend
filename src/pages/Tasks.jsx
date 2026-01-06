@@ -58,52 +58,63 @@ export default function Tasks() {
     }
 
     return (
-        <main className="container">
+        <main className="container vertical elements-top">
             <p className="err">{errMsg}</p>
-            <button className='btn btn-v' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Plus /> Add new task</button>
+            <em><h2>Maturity is not by age, but by the acceptance of your responsibilities:</h2></em>
+            <button className='btn vertical' onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Plus /> Add new task</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
-                    <form onSubmit={createTask}>
-                        <label>
-                            Pick a subject:
-                            <select required value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)}>
-                                <option value="">— None —</option>
-                                {subjects.map((subject) => (
-                                    <option key={subject} value={subject}>
-                                        {subject}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
+                    <div className="block vertical">
+                        <form onSubmit={createTask} className="block vertical">
+                            <label className="block">
+                                Pick a subject:
+                                <select className="m" required value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)}>
+                                    <option value="">— None —</option>
+                                    {subjects.map((subject) => (
+                                        <option key={subject} value={subject}>
+                                            {subject}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
 
-                        <label htmlFor="title">Title</label>
-                        <input
-                            required
-                            type="text"
-                            className="input"
-                            id="title"
-                            value={taskTitle}
-                            onChange={(e) => setTaskTitle(e.target.value)} />
+                            <label className="block">
+                                Title:
+                                <input
+                                    required
+                                    type="text"
+                                    className="input m"
+                                    id="title"
+                                    value={taskTitle}
+                                    onChange={(e) => setTaskTitle(e.target.value)} />
+                            </label>
 
-                        <label htmlFor="description">Description</label>
-                        <input
-                            required
-                            type="text"
-                            className="input"
-                            id="description"
-                            value={taskDescription}
-                            onChange={(e) => setTaskDescription(e.target.value)} />
+                            <label className="block">
+                                Desc:
+                                <input
+                                    required
+                                    type="text"
+                                    className="input m"
+                                    id="description"
+                                    value={taskDescription}
+                                    onChange={(e) => setTaskDescription(e.target.value)} />
+                            </label>
 
-                        <label htmlFor="date">date</label>
-                        <input
-                            required
-                            type="date"
-                            id="date"
-                            onChange={(e) => setTaskDueDate(new Date(e.target.value).toISOString())} />
-                        <button type='submit' className="btn">Add new task</button>
-                    </form>
+                            <label className="block">
+                                Date:
+                                <input
+                                    required
+                                    type="date"
+                                    className="m"
+                                    id="date"
+                                    onChange={(e) => setTaskDueDate(new Date(e.target.value).toISOString())} />
+                            </label>
 
-                    <button className="btn" onClick={() => { setOpen(false) }}>Cancel</button>
+                            <button type='submit' className="btn btn-primary">Add new task</button>
+                        </form>
+
+                        <button className="btn mt" onClick={() => { setOpen(false) }}>Cancel</button>
+                    </div>
                 </Modal>
             )}
             <TaskList />

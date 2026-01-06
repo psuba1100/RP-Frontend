@@ -89,10 +89,8 @@ export default function TaskList() {
     }, [count])
 
     return (
-        <section className="container">
-            <h2>Maturity is not by age, but by the acceptance of your responsibilities:</h2>
-
-            <label>
+        <section className="main vertical elements-top mt">
+            <label className="block vertical">
                 Pick a subject to filter by:
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
@@ -107,7 +105,7 @@ export default function TaskList() {
             {isLoading
                 ? <p>Loading...</p>
                 : (
-                    <ul>
+                    <ul className="block vertical">
                         {tasks?.length
                             ? tasks.map(task => <Task key={task._id} task={task} />)
                             : <p>No tasks, enjoy the time for yourself <Coffee /></p>
@@ -116,7 +114,7 @@ export default function TaskList() {
                 )
             }
 
-            <ul className="container-h">
+            <ul className="block g-2">
                 {pageLinks?.length
                     ? pageLinks.map((link) => link != p
                         ? <li key={link}><button className="btn" onClick={(e) => setSearchParams({ p: link, s })}>{link}</button></li>

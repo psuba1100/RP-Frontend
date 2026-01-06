@@ -24,7 +24,8 @@ export const useFlashcardStore = create((set) => ({
             }
 
             if (status == 404) {
-                return 'The set you are trying to reach does not exist'
+                navigate('/404', { replace: true })
+                return 
             }
 
             return ''

@@ -22,7 +22,7 @@ export default function Card({ question }) {
 
 
     return (
-        <section className="container">
+        <section className="container vertical g-2">
             <div
                 className={`flashcard ${flipped ? "flipped" : ""} ${noAnim ? "no-anim" : ""}`}
                 onClick={() => setFlipped(f => !f)}
@@ -55,24 +55,24 @@ export default function Card({ question }) {
 
             {
                 question[`${flipped ? 'back' : 'front'}`]?.image
-                    ? <button className="btn" onClick={(e) => { setOpen(true) }}><Fullscreen /> Enlarge image</button>
+                    ? <button className="btn btn-primary" onClick={(e) => { setOpen(true) }}><Fullscreen /> Enlarge image</button>
                     : <></>
             }
 
             {open && (
                 <Modal onClose={() => setOpen(false)}>
-                    <div className="container">
+                    <div className="block vertical">
                         {
                             question[`${flipped ? 'back' : 'front'}`]?.image
                                 ? (<img
                                     src={`${API_URL}/r/image/${question[`${flipped ? 'back' : 'front'}`].image}`}
                                     crossOrigin="use-credentials"
-                                    style={{ maxWidth: "700px" }}
+                                    style={{ width: 'max-content', maxWidth: '100%', maxHeight:'55vh' }}
                                 />)
                                 : <></>
                         }
 
-                        <button className="btn" onClick={() => { setOpen(false) }}>close</button>
+                        <button className="btn btn-primary mt" onClick={() => { setOpen(false) }}>Close</button>
                     </div>
                 </Modal>
             )}

@@ -84,9 +84,9 @@ export default function CreateFlashcard() {
                     <div className="block vertical">
                         <p>{errMsg}</p>
                         <form onSubmit={sendFlashcardSet} className="block vertical">
-                            <label className="block vertical">
+                            <label className="block">
                                 Pick a subject:
-                                <select required value={subject} onChange={(e) => setSubject(e.target.value)}>
+                                <select  className="m" required value={subject} onChange={(e) => setSubject(e.target.value)}>
                                     <option value="">— None —</option>
                                     {subjects.map((subject) => (
                                         <option key={subject} value={subject}>
@@ -118,7 +118,7 @@ export default function CreateFlashcard() {
                                     onChange={(e) => setDescription(e.target.value)} />
                             </label>
 
-                            <button type='submit' className="btn">Create</button>
+                            <button type='submit' className="btn btn-primary">Create</button>
                         </form>
 
                         <button className="btn mt" onClick={() => { setOpen(false) }}>Cancel and return to questions</button>

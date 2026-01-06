@@ -17,6 +17,15 @@
     overflow: scroll;
 }
 
+.main-oh {
+    max-height: 80vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 .block {
     display: flex;
     align-items: center;
@@ -27,7 +36,7 @@
     flex-direction: column;
 }
 
-.horizontal-priority{
+.horizontal-priority {
     flex-direction: row;
 
     @media (max-width: breakpoints.$phone) {
@@ -35,12 +44,32 @@
     }
 }
 
-.elements-top{
+.vertical-priority {
+    flex-direction: column;
+
+    @media (max-width: breakpoints.$phone) {
+        flex-direction: row;
+    }
+}
+
+.elements-top {
     justify-content: flex-start;
 }
 
-.h-elements-top{
+.h-elements-top {
     align-items: flex-start;
+}
+
+.h-elements-left{
+    justify-content: flex-start;
+}
+
+.elements-left{
+    align-items: flex-start;
+}
+
+.h-elements-right{
+    justify-content: flex-end;
 }
 
 .item {
@@ -59,7 +88,7 @@
     width: 60%;
 }
 
-.w-100{
+.w-100 {
     width: 99%;
 }
 
@@ -68,27 +97,53 @@
 }
 
 .g-2 {
-  gap: 2rem;
+    gap: 2rem;
 }
 
-nav, footer {
-  min-height: 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem 0 1rem;
-  background-color: #111111;
-  z-index: 1;
-  max-width: 100%;
+nav,
+footer {
+    min-height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem 0 1rem;
+    background-color: #111111;
+    z-index: 1;
+    max-width: 100%;
 }
 
 footer {
-  margin-top: auto;
+    margin-top: auto;
+    align-self: stretch;
+    justify-content: space-between;
+    min-height: 10vh;
 }
 
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 1rem;
+}
+
+.phone-hidden {
+    @media (max-width: breakpoints.$phone) {
+        display: none;
+    }
+}
+
+.phone-shown {
+    display: none;
+
+    @media (max-width: breakpoints.$phone) {
+        display: inline-flex;
+    }
+}
+
+.stretch{
+    align-self: stretch;
+}
+
+.text-center{
+    text-align: center;
 }

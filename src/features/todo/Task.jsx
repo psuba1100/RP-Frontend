@@ -44,12 +44,11 @@ export default function Task({ task }) {
     }
 
     return (
-        <li className="task-item">
+        <li className="block vertical w-100 outline">
             <h3>{task.title}</h3>
             <p>{task.description}</p>
-            <p>from {task.subject}</p>
-            <p>due {datum}</p>
-            <button className="btn btn-v" onClick={(e) => deleteTask(e)}><CircleCheckBig /> Done</button>
+            <p>from {task.subject}; due {datum}</p>
+            <button className="btn btn-primary" onClick={(e) => deleteTask(e)}><CircleCheckBig /> Done</button>
         </li>
     );
 }
