@@ -69,53 +69,62 @@ export default function CreateFlashcard() {
         }
     }
     return (
-        <main className="container">
+        <main className="main vertical elements-top">
             <p>{errMsg}</p>
-            <button className="btn v-btn" onClick={addCreateCard}><SquarePlus /> Add new card</button>
+            <div className="block horizontal-priority g-2">
+                <TextAssist />
+                <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Send /> Questions are done, let's finish!</button>
+            </div>
             {Object.entries(cards).map(([id, card]) => (
                 <CreationCard key={id} id={id} card={card} />
             ))}
-            <button className="btn v-btn" onClick={() => { setOpen(true); fetchSubjects(axiosPrivate, location, navigate) }}><Send/> Questions are done, let's finish!</button>
-
+            <button className="btn mt" onClick={addCreateCard}><SquarePlus /> Add new card</button>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
-                    <p>{errMsg}</p>
-                    <form onSubmit={sendFlashcardSet}>
-                        <label>
-                            Pick a subject:
-                            <select required value={subject} onChange={(e) => setSubject(e.target.value)}>
-                                <option value="">— None —</option>
-                                {subjects.map((subject) => (
-                                    <option key={subject} value={subject}>
-                                        {subject}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
+                    <div className="block vertical">
+                        <p>{errMsg}</p>
+                        <form onSubmit={sendFlashcardSet} className="block vertical">
+                            <label className="block vertical">
+                                Pick a subject:
+                                <select required value={subject} onChange={(e) => setSubject(e.target.value)}>
+                                    <option value="">— None —</option>
+                                    {subjects.map((subject) => (
+                                        <option key={subject} value={subject}>
+                                            {subject}
+                                        </option>
+                                    ))}
+                                </select>
+                            </label>
 
-                        <label htmlFor="title">Title</label>
-                        <input
-                            required
-                            type="text"
-                            className="input"
-                            id="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)} />
-                        <label htmlFor="description">Description</label>
-                        <input
-                            required
-                            type="text"
-                            className="input"
-                            id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)} />
-                        <button type='submit' className="btn">Create</button>
-                    </form>
+                            <label className="block mt">
+                                Title:
+                                <input
+                                    required
+                                    type="text"
+                                    className="input m"
+                                    id="title"
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)} />
+                            </label>
 
-                    <button className="btn" onClick={() => { setOpen(false) }}>Return to questions</button>
+                            <label className="block mt">
+                                Desc:
+                                <input
+                                    required
+                                    type="text"
+                                    className="input m"
+                                    id="description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)} />
+                            </label>
+
+                            <button type='submit' className="btn">Create</button>
+                        </form>
+
+                        <button className="btn mt" onClick={() => { setOpen(false) }}>Cancel and return to questions</button>
+                    </div>
                 </Modal>
             )}
-            <TextAssist/>
         </main>
     )
 }

@@ -1,0 +1,111 @@
+/* Custom buttons */
+.btn {
+  background-color: #212830;
+  color: #FEE7ED;
+  padding: 0.5em;
+  font-size: 1.2rem;
+  border: 3px solid #423337;
+  border-radius: 0.5em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/*CHANGE CLRS*/
+.btn:hover {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  background: #3f4755;
+  border-color: #3f4755;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: #EF476F;
+  color: #191214;
+  border: none;
+}
+
+/* Text inputs */
+.input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 3px solid #423337;
+  background: #212830;
+  color: #FEE7ED;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.input:hover {
+  border-color: #423337;
+}
+
+.input:focus {
+  border-color: #423337;
+  border: 3px solid #EF476F;
+  background: #212830;
+}
+
+/* Custom checkbox */
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+label[for=trustThisDevice] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+label[for=trustThisDevice]::before {
+  content: "";
+  width: 1.2em;
+  height: 1.2em;
+  border: 3px solid #423337;
+  background: #212830;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.15s ease;
+}
+
+.checkbox:checked + label::before {
+  background: #EF476F;
+  border-color: #EF476F;
+}
+
+.checkbox:checked + label::after {
+  content: "";
+  position: absolute;
+  margin-left: 0.4em;
+  width: 0.35em;
+  height: 0.65em;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+}
+
+.link {
+  color: #EF476F;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/*# sourceMappingURL=inputs.css.map */

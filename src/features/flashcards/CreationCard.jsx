@@ -50,66 +50,79 @@ export default function FlashcardItem({ id, card }) {
     };
 
     return (
-        <div className="card-box">
-            <h3>Card {id}</h3>
+        <div className="block outline vertical">
+            <div className="block horizontal-priority h-elements-top">
+                {/* FRONT SIDE */}
+                <div className="block vertical item m">
+                    <h4>Front</h4>
 
-            {/* FRONT SIDE */}
-            <div>
-                <h4>Front</h4>
-
-                <textarea
-                    value={card.front.text}
-                    onChange={(e) => updateCard(id, "front", "text", e.target.value)}
-                />
-
-                {card.front.image ? (
                     <div>
-                        <img
-                            src={`${API_URL}/r/image/${card.front.image}`}
-                            crossOrigin="use-credentials"
-                            alt=""
-                            style={{ maxWidth: "150px" }}
-                        />
-                        <button onClick={() => deleteImage("front")}>Remove image</button>
+
                     </div>
-                ) : (
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => uploadImage("front", e.target.files[0])}
+                    <textarea
+                        value={card.front.text}
+                        onChange={(e) => updateCard(id, "front", "text", e.target.value)}
+                        placeholder="Write some question"
                     />
-                )}
+
+                    {card.front.image ? (
+                        <div className="mt block vertical">
+                            Image preview:
+                            <img
+                                src={`${API_URL}/r/image/${card.front.image}`}
+                                crossOrigin="use-credentials"
+                                alt=""
+                                style={{ maxWidth: "150px", maxHeight: '200px' }}
+                            />
+                            <button className='btn' onClick={() => deleteImage("front")}>Remove image</button>
+                        </div>
+                    ) : (
+                        <div className="mt block vertical">
+                            Upload image:
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => uploadImage("front", e.target.files[0])}
+                            />
+                        </div>
+                    )}
+                </div>
+
+                {/* BACK SIDE */}
+                <div className="item block vertical m">
+                    <h4>Back</h4>
+
+                    <textarea
+                        value={card.back.text}
+                        onChange={(e) => updateCard(id, "back", "text", e.target.value)}
+                        placeholder="Write the answer"
+                    />
+
+                    {card.back.image ? (
+                        <div className=" mt block vertical">
+                            Image preview:
+                            <img
+                                src={`${API_URL}/r/image/${card.back.image}`}
+                                crossOrigin="use-credentials"
+                                alt=""
+                                style={{ maxWidth: "150px", maxHeight: '200px'  }}
+                            />
+                            <button className='btn' onClick={() => deleteImage("back")}>Remove image</button>
+                        </div>
+                    ) : (
+                        <div className="mt block vertical">
+                            Upload image:
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => uploadImage("back", e.target.files[0])}
+                            />
+                        </div>
+                    )}
+                </div>
             </div>
 
-            {/* BACK SIDE */}
-            <div>
-                <h4>Back</h4>
-
-                <textarea
-                    value={card.back.text}
-                    onChange={(e) => updateCard(id, "back", "text", e.target.value)}
-                />
-
-                {card.back.image ? (
-                    <div>
-                        <img
-                            src={`${API_URL}/r/image/${card.back.image}`}
-                            crossOrigin="use-credentials"
-                            alt=""
-                            style={{ maxWidth: "150px" }}
-                        />
-                        <button onClick={() => deleteImage("back")}>Remove image</button>
-                    </div>
-                ) : (
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => uploadImage("back", e.target.files[0])}
-                    />
-                )}
-            </div>
-
-            <button onClick={async () => {
+            <button className='btn mt' onClick={async () => {
                 const frontImg = card.front?.image;
                 const backImg = card.back?.image;
 

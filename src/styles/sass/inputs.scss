@@ -1,0 +1,117 @@
+@use 'rootVariables';
+
+/* Custom buttons */
+
+.btn {
+    background-color: rootVariables.$background-secondary;
+    color: rootVariables.$color;
+
+    padding: 0.5em;
+    font-size: 1.2rem;
+    border: 3px solid rootVariables.$outline;
+    border-radius: 0.5em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/*CHANGE CLRS*/
+
+.btn:hover {
+    transform: scale(0.97);
+}
+
+.btn:disabled {
+    background: #3f4755;
+    border-color: #3f4755;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: rootVariables.$primary;
+    color: rootVariables.$background;
+    border: none;
+}
+
+/* Text inputs */
+
+.input {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 3px solid rootVariables.$outline;
+    background: rootVariables.$background-secondary;
+    color: rootVariables.$color;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.input:hover {
+    border-color: rootVariables.$outline;
+}
+
+.input:focus {
+    border-color: rootVariables.$outline;
+    border: 3px solid rootVariables.$primary;
+    background: rootVariables.$background-secondary;
+}
+
+/* Custom checkbox */
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+label[for="trustThisDevice"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+}
+
+label[for="trustThisDevice"]::before {
+  content: "";
+  width: 1.2em;
+  height: 1.2em;
+  border: 3px solid rootVariables.$outline;
+  background: rootVariables.$background-secondary;
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.15s ease;
+}
+
+.checkbox:checked + label::before {
+  background: rootVariables.$primary;
+  border-color: rootVariables.$primary;
+}
+
+.checkbox:checked + label::after {
+  content: "";
+  position: absolute;
+  margin-left: 0.4em;
+  width: 0.35em;
+  height: 0.65em;
+  border-right: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+}
+
+.link {
+  color: rootVariables.$primary;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

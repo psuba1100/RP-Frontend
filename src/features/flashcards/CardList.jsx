@@ -92,10 +92,8 @@ export default function CardList() {
     }, [isLoading])
 
     return (
-        <section className="container">
-            <h2>Don't practice until you get it right. <br /> Practice until you can't get it wrong.</h2>
-
-            <label>
+        <section className="container vertical elements-top main">
+            <label className="block vertical">
                 Pick a subject to filter by:
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
@@ -110,7 +108,7 @@ export default function CardList() {
             {isLoading
                 ? <p>Loading...</p>
                 : (
-                    <ul>
+                    <ul className="block vertical">
                         {flashcardSets?.length
                             ? flashcardSets.map(card => <CardSet key={card._id} card={card} />)
                             : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
@@ -119,7 +117,7 @@ export default function CardList() {
                 )
             }
 
-            <ul className="container-h">
+            <ul className="block g-2">
                 {pageLinks?.length
                     ? pageLinks.map((link) => link != p
                         ? <li key={link}><button className="btn" onClick={(e) => setSearchParams({ p: link, s })}>{link}</button></li>

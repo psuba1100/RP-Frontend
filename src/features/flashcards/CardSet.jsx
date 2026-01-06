@@ -40,10 +40,10 @@ export default function CardSet({ card }) {
         }
     }
     return (
-        <li className="container">
+        <li className="block w-100 vertical outline">
             <h3>{card.title}</h3>
+            <p><em>Created by {card.ownerUsername}</em></p>
             <p>{card.description}</p>
-            <p>This set was created by {card.ownerUsername}</p>
             <button className="btn btn-v" onClick={redirectToFlashcard}><BrainCircuit /> Practice</button>
             {card.access != 'owner' ? (
                 <button className="btn btn-v" onClick={deleteReference}><Trash /> Delete reference</button>

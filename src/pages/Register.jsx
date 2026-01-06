@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useAuthStore } from "../store/authStore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGlobalSettingsStore } from "../store/globalSettingsStorage";
 
 export default function Register() {
@@ -84,10 +84,10 @@ export default function Register() {
     }, [trustDevice])
 
     return (
-        <div className="container">
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="username">
+        <div className="container vertical">
+            <h1>Create account</h1>
+            <form onSubmit={handleSubmit} className="block vertical w">
+                <label htmlFor="username" className="m itemStart">
                     Username
                 </label>
                 <input
@@ -100,7 +100,7 @@ export default function Register() {
                     required
                 />
 
-                <label htmlFor="password">
+                <label htmlFor="password" className="m mt itemStart">
                     Password
                 </label>
                 <input
@@ -112,9 +112,7 @@ export default function Register() {
                     required
                 />
 
-                <label htmlFor="confirm_pwd">
-                    Confirm Password
-                </label>
+                <label htmlFor="confirm_pwd" className="m mt itemStart"> Confirm Password </label>
                 <input
                     type="password"
                     id="confirm_pwd"
@@ -123,19 +121,18 @@ export default function Register() {
                     value={passwordMatch}
                     required
                 />
-                <div className="horisontalBlock">
-                    <input
-                        className="checkbox"
-                        type="checkbox"
-                        id="trustThisDevice"
-                        checked={trustDevice}
-                        onChange={(e) => setTrustDevice(prev => !prev)}
-                    />
-                    <label htmlFor="trustThisDevice">Trust this device after loggin in?</label>
-                </div>
-                <p>{errMsg}</p>
+                <input
+                    className="checkbox mt itemStart"
+                    type="checkbox"
+                    id="trustThisDevice"
+                    checked={trustDevice}
+                    onChange={(e) => setTrustDevice(prev => !prev)}
+                />
+                <label htmlFor="trustThisDevice" className="mt itemStart">Trust this device?</label>
+                <p className="itemStart">{errMsg}</p>
                 <button disabled={!validPassword || !passwordMatchValid ? true : false} className="btn" type="submit">Sign Up</button>
             </form>
+            <p className="mt">Already have an account? <Link to='/login' className="link">Log in!</Link></p>
         </div>
     )
 }

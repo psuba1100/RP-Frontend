@@ -1,0 +1,95 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main {
+  max-height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal-priority {
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .horizontal-priority {
+    flex-direction: column;
+  }
+}
+
+.elements-top {
+  justify-content: flex-start;
+}
+
+.h-elements-top {
+  align-items: flex-start;
+}
+
+.item {
+  flex: 1;
+}
+
+.m {
+  margin: 1rem;
+}
+
+.mt {
+  margin-top: 2rem;
+}
+
+.w {
+  width: 60%;
+}
+
+.w-100 {
+  width: 99%;
+}
+
+.itemStart {
+  align-self: flex-start;
+}
+
+.g-2 {
+  gap: 2rem;
+}
+
+nav, footer {
+  min-height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  background-color: #111111;
+  z-index: 1;
+  max-width: 100%;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+/*# sourceMappingURL=layouts.css.map */

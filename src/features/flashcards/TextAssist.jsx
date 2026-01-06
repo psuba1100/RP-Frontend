@@ -58,12 +58,12 @@ $\\le \\ge \\neq$
             <button className='btn' onClick={() => setOpen(true)}><PencilRuler />Text formatting guide</button>
             {open && (
                 <Modal onClose={() => setOpen(false)} >
-                    <main className='container'>
+                    <main className='block vertical elements-top'>
                         <section>
                             <h2>Text formatting</h2>
                             Flashcards support markdown rendering. This means, you can use specific syntax to format your questions and answers or to put emphasis on specific word.
                             <h3>Example</h3>
-                            <div className='container-h'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt'>
                                 <div className='black'>
                                     *This is Italic* <br /><br /> **This is Bold** <br /><br /> ***This is Bold and Italic***
                                 </div>
@@ -73,7 +73,7 @@ $\\le \\ge \\neq$
                             </div>
                             <br /><br />It can also be used to render text blocks or code blocks.
                             <h3>Example</h3>
-                            <div className='container-h'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt'>
                                 <div className='black'>
                                     Blah Blah `inline text blockt` Blah <br /><br /> ``` <br /> name = input('Enter your name: ') <br /> n = int(input('Enter a number: ')) <br /> for i in range(n): <br />  &nbsp; &nbsp; &nbsp; &nbsp;print(f'Hello {'{name}'}!') <br /> ``` <br />
                                 </div>
@@ -83,7 +83,7 @@ $\\le \\ge \\neq$
                             </div>
                             <br /><br /> But most importanty, it can convert LaTeX notation and render math equations.
                             <h3>Example</h3>
-                            <div className='container-h'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt'>
                                 <div className='black'>
                                     Inline equation: $A = B \cdot C$ <br /> <br />  Block equation: <br /> $$ <br /> v = \frac{'{s}{t}'} <br /> $$
                                 </div>
@@ -93,7 +93,7 @@ $\\le \\ge \\neq$
                             </div>
                             <h3>Useful notations</h3>
                             <em>You can find more LaTeX notations online.</em>
-                            <div className='container-h'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt'>
                                 <div className='black'>
                                     A \cdot B <br /><br /> A_{'{index}'} <br /><br /> A^{'{exponent}'} <br /><br /> \frac{'{numerator}{denominator}'} <br /><br /> \sin (x) \cos (x) \tan (x) <br /><br /> \theta \phi \pi <br /><br /> {'\\le \\ge \\neq'}
                                 </div>
@@ -102,7 +102,7 @@ $\\le \\ge \\neq$
                                 </div>
                             </div>
                             <h3>Try it out!</h3>
-                            <div className='container'>
+                            <div className='block horizontal-priority g-2 mt h-elements-top'>
                                 <textarea
                                     value={markdown}
                                     onChange={(e) => setMarkdown(e.target.value)}
@@ -114,8 +114,7 @@ $\\le \\ge \\neq$
                                 </div>
                             </div>
                         </section>
-                        <section></section>
-                        <button className="btn" onClick={() => { setOpen(false) }}>Cool!</button>
+                        <button className="btn mt" onClick={() => { setOpen(false) }}>Cool!</button>
                     </main>
                 </Modal>
             )}

@@ -21,62 +21,37 @@ body {
     flex-direction: column;
 }
 
-.btn {
-    background-color: rootVariables.$background-secondary;
-    color: rootVariables.$color;
-
-    margin-top: 0;
-    padding: 0.5rem 1rem;
-    border: 1px solid rootVariables.$outline;
-    /* subtle outline */
-    border-radius: 8px;
-    font-size: 16px;
+label{
+    font-size: 1.4rem;
     font-weight: 500;
-    cursor: pointer;
-    transition: 0.2s ease;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
 }
 
-/*CHANGE CLRS*/
-
-.btn:hover {
-    transform: scale(0.97);
+h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
 }
 
-.btn:disabled {
-    background: #3f4755;
-    border-color: #3f4755;
-    color: #9ca3af;
-    cursor: not-allowed;
+svg {
+  vertical-align: bottom;
 }
 
-.btn-primary {
-    background-color: rootVariables.$primary;
-    color: rootVariables.$background;;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.input {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid rootVariables.$outline;
-    background: rootVariables.$background-secondary;
-    color: rootVariables.$color;
-    outline: none;
-    transition: 0.2s ease;
+h2{
+    text-align: center;
 }
 
-.input:hover {
-    border-color: rootVariables.$outline;
+.outline{
+    margin: 1.2rem 2rem 1.2rem 2rem;
+    padding: 0.2rem;
+    border: 1.5px solid rootVariables.$outline;
+    border-radius: 0.5rem;
 }
 
-.input:focus {
-    border-color: rootVariables.$outline;
-    box-shadow: 0 0 0 3px rootVariables.$primary;
-    background: rootVariables.$background-secondary;
+p{
+    text-align: center;
 }
