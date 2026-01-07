@@ -1,7 +1,7 @@
 import { Send, SquarePlus } from "lucide-react"
 import { v4 as uuidv4 } from 'uuid';
 import { useNewFlashcardStore } from "../store/newFlashcardStore";
-import CreationCard from "../features/flashcards/creationCard";
+import CreationCard from "../features/flashcards/CreationCard";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useSubjectStore } from "../store/subjectsStore";
 import { useState } from "react";
