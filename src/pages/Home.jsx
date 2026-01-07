@@ -22,7 +22,7 @@ export default function Home() {
 
       <div className="block horizontal-priority mt-4 stretch hp-elements-top">
         <h2 className="m">About website</h2>
-        <p className="m item text-center">Winkify.review is a lightweight website designed to make student life easier. It lets you create to-do tasks and flashcard sets with rich text formatting, images, and math formulas, which you can easily share with friends. Your classmates can also share their own sets with you, and you can add them to your library in one click. The website also includes a digital locker, so you never have to wonder whether you left your books or notes at home or at school. The entire website is completely free to use. A video tutorial showing the main features can be found <Link className="link">here</Link>.</p>
+        <p className="m item text-center">Winkify.review is a lightweight website designed to make student life easier. It lets you create to-do tasks and flashcard sets with rich text formatting, images, and math formulas, which you can easily share with friends. Your classmates can also share their own sets with you, and you can add them to your library in one click. The website also includes a digital locker, so you never have to wonder whether you left your books or notes at home or at school. The entire website is completely free to use.</p>
       </div>
 
       <div className="block horizontal-priority mt-4 stretch hp-elements-top">
@@ -34,7 +34,7 @@ export default function Home() {
         <h2 className="m">About technical details</h2>
         <div className="block vertical item  text-center">
           <p>The website consists of two main parts: the backend and the frontend. The backend is further divided into a server and a database. The server is written in JavaScript, runs on Node.js, and uses the Express.js framework. It is self-hosted on a computer running a Debian-based Linux distribution. The server handles incoming requests, validates data, communicates with the database, and sends responses back to the client. The project uses a JSON-based MongoDB database, which is also self-hosted.</p>
-          <p>The frontend is built using React and Vite. It is the part of the website you see when you load the page. It provides a clean and intuitive user interface that allows users to access, edit, and share their data stored on the server. A complete list of used dependencies and the source code can be found on my <Link className="link">GitHub</Link>.</p>
+          <p>The frontend is built using React and Vite. It is the part of the website you see when you load the page. It provides a clean and intuitive user interface that allows users to access, edit, and share their data stored on the server. A complete list of used dependencies and the source code can be found on my <a href="https://github.com/psuba1100/RP-Frontend" className="link">GitHub</a>.</p>
         </div>
       </div>
 
@@ -42,7 +42,7 @@ export default function Home() {
         <h2 className="m">About privacy policy</h2>
         <div className="block vertical item  text-center">
           <p> This website uses strictly necessary cookies solely for user authentication and authorization. These cookies are required for the service to function and cannot be disabled. We do not use analytical, tracking, or marketing cookies. </p>
-          <p> All data transmitted between your device and our servers are encrypted using TLS/HTTPS. All server requests are routed through <Link className="link">Cloudflare</Link>, a third-party service provider that helps secure and deliver our content. </p>
+          <p> All data transmitted between your device and our servers are encrypted using TLS/HTTPS. All server requests are routed through <a href="https://www.cloudflare.com/" className="link">Cloudflare</a>, a third-party service provider that helps secure and deliver our content. </p>
           <p> Any image you upload to the server may be publicly accessible to other users or services on the internet. Do not upload any sensitive or confidential information. All text content you create on flashcards may be visible to other users of Winkify. Do not include sensitive or personal information. </p>
           <p> We do not collect or store personal data such as email addresses, physical addresses, dates of birth, or similar identifiers. The only identifier associated with your account is your username. We strongly recommend that you do not use your real name as your username. </p>
           <p> You may delete your account at any time in the <strong>Study Hub</strong> section. Account deletion permanently removes all associated data from our systems, including lockers, subjects, to-do tasks, and flashcard sets. Images previously uploaded may remain accessible for up to 24 hours after account deletion due to technical limitations. </p>

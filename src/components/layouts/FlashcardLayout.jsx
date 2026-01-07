@@ -1,4 +1,4 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useFlashcardStore } from "../../store/flashcardStore";
 import { ArrowBigLeft, ArrowBigRight, BookMarked, Check, Dices } from "lucide-react";
 import SetOptions from "../../features/flashcards/SetOptions";

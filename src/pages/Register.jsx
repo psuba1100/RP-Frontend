@@ -76,7 +76,7 @@ export default function Register() {
             setPasswordMatch('')
             setErrMsg('')
         } catch (err) {
-            console.log(err)
+            console.error(err)
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else {
@@ -97,6 +97,7 @@ export default function Register() {
                     Username
                 </label>
                 <input
+                    maxLength={32}
                     type="text"
                     id="username"
                     className="input"
@@ -110,6 +111,7 @@ export default function Register() {
                     Password
                 </label>
                 <input
+                    maxLength={32}
                     type="password"
                     id="password"
                     className="input"
@@ -120,6 +122,7 @@ export default function Register() {
 
                 <label htmlFor="confirm_pwd" className="m mt itemStart"> Confirm Password </label>
                 <input
+                    maxLength={32}
                     type="password"
                     id="confirm_pwd"
                     className="input"

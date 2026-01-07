@@ -33,9 +33,7 @@ export default function CreateFlashcard() {
     const sendFlashcardSet = async (e) => {
         e.preventDefault()
 
-        console.log(cards)
         const questions = Object.values(cards)
-        console.log(questions)
 
         const dataToSend = {
             title,
@@ -43,8 +41,6 @@ export default function CreateFlashcard() {
             subject,
             questions
         }
-
-        console.log(dataToSend)
 
         try {
             await axiosPrivate.post('/r/flashcard', dataToSend)
@@ -56,7 +52,7 @@ export default function CreateFlashcard() {
             clearCards('')
             setErrMsg('Created!')
         } catch (err) {
-            console.log(err)
+            console.error(err)
             const status = err?.response?.status;
             const message = err?.response?.data?.message || "Unknown error";
 
@@ -87,7 +83,7 @@ export default function CreateFlashcard() {
                         <form onSubmit={sendFlashcardSet} className="block vertical">
                             <label className="block">
                                 Pick a subject:
-                                <select  className="m" required value={subject} onChange={(e) => setSubject(e.target.value)}>
+                                <select className="m" required value={subject} onChange={(e) => setSubject(e.target.value)}>
                                     <option value="">— None —</option>
                                     {subjects.map((subject) => (
                                         <option key={subject} value={subject}>
@@ -100,6 +96,8 @@ export default function CreateFlashcard() {
                             <label className="block mt">
                                 Title:
                                 <input
+                                    autoComplete="off"
+                                    maxLength={32}
                                     required
                                     type="text"
                                     className="input m"
@@ -111,6 +109,8 @@ export default function CreateFlashcard() {
                             <label className="block mt">
                                 Desc:
                                 <input
+                                    autoComplete="off"
+                                    maxLength={200}
                                     required
                                     type="text"
                                     className="input m"

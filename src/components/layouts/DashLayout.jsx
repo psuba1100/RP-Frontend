@@ -23,7 +23,6 @@ export default function DashLayout() {
           withCredentials: true
         }
       )
-      console.log(response)
       clearAuthStore()
       navigate('/login')
     } catch (err) {

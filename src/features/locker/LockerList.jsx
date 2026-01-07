@@ -28,7 +28,6 @@ export default function LockerList() {
         e.preventDefault()
 
         const data = exportToApiFormat()
-        console.log(data)
 
         try {
             await axiosPrivate.put('/u/locker', {
@@ -58,6 +57,8 @@ export default function LockerList() {
             <p>{changes ? 'Careful, you have unsaved changes!' : ''}</p>
             <section className="block">
                 <input
+                    autoComplete="off"
+                    maxLength={32}
                     type="text"
                     placeholder="Item name"
                     className="input"

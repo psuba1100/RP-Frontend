@@ -74,6 +74,7 @@ export default function Login() {
             <form onSubmit={handleSubmit} className="block vertical w">
                 <label htmlFor="username" className="itemStart">Username</label>
                 <input
+                    maxLength={32}
                     className="input"
                     type="text"
                     id="username"
@@ -84,6 +85,7 @@ export default function Login() {
                 />
                 <label htmlFor="password" className="mt itemStart">Password</label>
                 <input
+                    maxLength={32}
                     className="input"
                     type="password"
                     id="password"

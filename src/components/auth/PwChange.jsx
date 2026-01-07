@@ -58,6 +58,7 @@ export default function PwChange() {
                         <form onSubmit={changePassword} className="block vertical">
                             <label htmlFor="password">Enter your existing password</label>
                             <input
+                                maxLength={32}
                                 id="password"
                                 type="password"
                                 required
@@ -68,6 +69,7 @@ export default function PwChange() {
 
                             <label htmlFor="newPassword" className="mt">Enter new password</label>
                             <input
+                                maxLength={32}
                                 id="newPassword"
                                 type="password"
                                 required
@@ -78,6 +80,7 @@ export default function PwChange() {
 
                             <label htmlFor="newPasswordRepeat" className="mt">Enter new password again</label>
                             <input
+                                maxLength={32}
                                 id="newPasswordRepeat"
                                 type="password"
                                 required
@@ -90,7 +93,7 @@ export default function PwChange() {
                                 <button className="btn m" onClick={() => { setOpen(false); setPassword(''); setNewPassword(''); setNewPasswordRepeat(''); setErrMsg('') }}>Cancel</button>
                             </div>
                         </form>
-                        
+
                     </div>
                 </Modal>
             )}

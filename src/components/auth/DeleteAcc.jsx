@@ -50,6 +50,7 @@ export default function DeleteAcc() {
                             <div className="block vertical">
                                 <label htmlFor="password">Enter your password</label>
                                 <input
+                                    maxLength={32}
                                     id="password"
                                     type="password"
                                     required

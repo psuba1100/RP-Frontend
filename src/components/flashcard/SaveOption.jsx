@@ -141,6 +141,8 @@ export default function SaveOption({ setErrMsg }) {
                                         <label className="block vertical text-center">
                                             Name a new subject you want to store this set under:
                                             <input
+                                                maxLength={32}
+                                                autoComplete="off"
                                                 type="text"
                                                 className="input"
                                                 style={{ maxWidth: '90%' }}

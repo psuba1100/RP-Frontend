@@ -104,6 +104,7 @@ $\\le \\ge \\neq$
                             <h3>Try it out!</h3>
                             <div className='block horizontal-priority g-2 mt h-elements-top'>
                                 <textarea
+                                    maxLength={2000}
                                     value={markdown}
                                     onChange={(e) => setMarkdown(e.target.value)}
                                     className='input'

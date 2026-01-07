@@ -51,7 +51,9 @@ export default function SubjectList() {
             <div className="block">
                 <label htmlFor="newSubject"></label>
                 <input
-                placeholder="Subject name"
+                    autoComplete="off"
+                    maxLength={32}
+                    placeholder="Subject name"
                     type="text"
                     id="newSubject"
                     className="input"
@@ -61,8 +63,8 @@ export default function SubjectList() {
             </div>
             <ul className="block vertical g-05">
                 {subjects?.length
-                    ? subjects.map((subject) => <SubjectElement key={subject} subject={subject} setErrMsg={setErrMsg}/>)
-                    : <p><Coffee/> No subjects yet. Why don't you add some?</p>
+                    ? subjects.map((subject) => <SubjectElement key={subject} subject={subject} setErrMsg={setErrMsg} />)
+                    : <p><Coffee /> No subjects yet. Why don't you add some?</p>
                 }
             </ul>
         </section>

@@ -36,7 +36,6 @@ export default function FlashcardItem({ id, card }) {
 
         try {
             await axiosPrivate.delete('/r/image', { data: { imgName: filename } });
-            console.log(cards[id][side])
             updateCard(id, side, "image", "");
         } catch (err) {
             if (err.response && err.response.status === 404) {
@@ -60,6 +59,7 @@ export default function FlashcardItem({ id, card }) {
 
                     </div>
                     <textarea
+                        maxLength={2000}
                         value={card.front.text}
                         onChange={(e) => updateCard(id, "front", "text", e.target.value)}
                         placeholder="Write some question"
@@ -93,6 +93,7 @@ export default function FlashcardItem({ id, card }) {
                     <h4>Back</h4>
 
                     <textarea
+                        maxLength={2000}
                         value={card.back.text}
                         onChange={(e) => updateCard(id, "back", "text", e.target.value)}
                         placeholder="Write the answer"
@@ -105,7 +106,7 @@ export default function FlashcardItem({ id, card }) {
                                 src={`${API_URL}/r/image/${card.back.image}`}
                                 crossOrigin="use-credentials"
                                 alt=""
-                                style={{ maxWidth: "150px", maxHeight: '200px'  }}
+                                style={{ maxWidth: "150px", maxHeight: '200px' }}
                             />
                             <button className='btn' onClick={() => deleteImage("back")}>Remove image</button>
                         </div>

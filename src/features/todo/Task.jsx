@@ -32,7 +32,7 @@ export default function Task({ task }) {
 
             fetchTasks(axiosPrivate, location, navigate, p, s)
         } catch (err) {
-            console.log(err)
+            console.error(err)
             const status = err?.response?.status;
             const message = err?.response?.data?.message || "Unknown error";
 

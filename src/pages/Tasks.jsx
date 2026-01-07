@@ -44,7 +44,7 @@ export default function Tasks() {
             setErrMsg(response.data.message)
             fetchTasks(axiosPrivate, location, navigate)
         } catch (err) {
-            console.log(err)
+            console.error(err)
             const status = err?.response?.status;
             const message = err?.response?.data?.message || "Unknown error";
 
@@ -81,6 +81,8 @@ export default function Tasks() {
                             <label className="block">
                                 Title:
                                 <input
+                                    maxLength={32}
+                                    autoComplete="off"
                                     required
                                     type="text"
                                     className="input m"
@@ -92,6 +94,8 @@ export default function Tasks() {
                             <label className="block">
                                 Desc:
                                 <input
+                                    maxLength={200}
+                                    autoComplete="off"
                                     required
                                     type="text"
                                     className="input m"

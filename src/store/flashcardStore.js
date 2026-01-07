@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export const useFlashcardStore = create((set) => ({
+export const useFlashcardStore = create((set, get) => ({
     metadata: { saved: false },
     questions: [{ front: { text: '', image: '' }, back: { text: '', image: '' } }],
     numberOfQuestions: 0,
@@ -36,26 +36,25 @@ export const useFlashcardStore = create((set) => ({
             questionNumber: number
         })
     },
-    shuffle: () => {
-        set((state) => {
-            let array = [...state.questions];
-            let current = array.length;
+shuffle: () => {
+        const state = get();
+        
+        if (state.numberOfQuestions <= 1) return;
 
-            while (current !== 0) {
-                const randomIndex = Math.floor(Math.random() * current);
-                current--;
+        let array = [...state.questions];
+        let current = array.length;
 
-                [array[current], array[randomIndex]] = [array[randomIndex], array[current]];
-            }
+        while (current !== 0) {
+            const randomIndex = Math.floor(Math.random() * current);
+            current--;
+            [array[current], array[randomIndex]] = [array[randomIndex], array[current]];
+        }
 
-            if (state.numberOfQuestions > 1) {
-                return {
-                    questions: array,
-                    shuffleVersion: state.shuffleVersion + 1,
-                    questionNumber: 1,
-                };
-            }
-        })
+        set({
+            questions: array,
+            shuffleVersion: state.shuffleVersion + 1,
+            questionNumber: 1,
+        });
     },
     setMetadataSave: (save) => {
         set((state) => ({
