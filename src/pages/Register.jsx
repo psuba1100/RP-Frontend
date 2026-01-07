@@ -3,6 +3,7 @@ import axios from "../api/axios";
 import { useAuthStore } from "../store/authStore";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalSettingsStore } from "../store/globalSettingsStorage";
+import { useNewFlashcardStore } from "../store/newFlashcardStore";
 
 export default function Register() {
     const PWD_REGEX = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~])[A-Za-z\d!@#$%^&*()_\-+=\[{\]};:'",<.>/?\\|`~]{8,32}$/;
@@ -11,6 +12,7 @@ export default function Register() {
     const navigate = useNavigate()
     const setAuth = useAuthStore((s) => s.setAuth)
     const setTrustThisDevice = useGlobalSettingsStore((s) => s.setTrustThisDevice)
+    const clearCards = useNewFlashcardStore((s) => s.clearCards)
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -19,6 +21,10 @@ export default function Register() {
     const [passwordMatchValid, setPasswordMatchValid] = useState(false)
     const [trustDevice, setTrustDevice] = useState(false)
     const [errMsg, setErrMsg] = useState('')
+
+    useEffect(() => {
+        clearCards()
+    }, [])
 
     useEffect(() => {
         setValidPassword(PWD_REGEX.test(password))
@@ -130,7 +136,7 @@ export default function Register() {
                 />
                 <label htmlFor="trustThisDevice" className="mt itemStart">Trust this device?</label>
                 <p className="itemStart">{errMsg}</p>
-                <button disabled={!validPassword || !passwordMatchValid ? true : false} className="btn" type="submit">Sign Up</button>
+                <button disabled={!validPassword || !passwordMatchValid ? true : false} className="btn btn-primary" type="submit">Sign Up</button>
             </form>
             <p className="mt">Already have an account? <Link to='/login' className="link">Log in!</Link></p>
         </div>

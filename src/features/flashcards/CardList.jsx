@@ -3,7 +3,6 @@ import { useFlashcardSetsStore } from "../../store/flashcardSetsStore"
 import { useSubjectStore } from "../../store/subjectsStore"
 import { useEffect, useState } from "react"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import { v4 as uuidv4 } from 'uuid'
 import CardSet from "./CardSet"
 import { Lightbulb } from "lucide-react"
 
@@ -87,21 +86,22 @@ export default function CardList() {
         createPages(1, Math.floor(count / 10) + 1, parseInt(p))
     }, [count])
 
-    useEffect(() => {
-        console.log(isLoading)
-    }, [isLoading])
-
     return (
         <section className="container vertical elements-top main mt">
             <label className="block vertical">
                 Pick a subject to filter by:
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
-                    {subjects.map((subject) => (
-                        <option key={uuidv4()} value={subject}>
-                            {subject}
-                        </option>
-                    ))}
+                    {subjects?.length
+                        ? (
+                            [...new Set(subjects)].map((subject) => (
+                                <option key={subject} value={subject}>
+                                    {subject}
+                                </option>
+                            ))
+                        )
+                        : <></>
+                    }
                 </select>
             </label>
 
@@ -110,7 +110,7 @@ export default function CardList() {
                 : (
                     <ul className="block vertical">
                         {flashcardSets?.length
-                            ? flashcardSets.map(card => <CardSet key={card._id} card={card} />)
+                            ? flashcardSets.map((card, i)=> <CardSet key={`${card._id}-${i}`} card={card} />)
                             : <p>You have no flashcard sets. Why won't you create some? <Lightbulb /></p>
                         }
                     </ul>
@@ -119,7 +119,7 @@ export default function CardList() {
 
             <ul className="block g-2">
                 {pageLinks?.length
-                    ? pageLinks.map((link) => link != p
+                    ? [...new Set(pageLinks)].map((link) => link != p
                         ? <li key={link}><button className="btn" onClick={(e) => setSearchParams({ p: link, s })}>{link}</button></li>
                         : <li key={link}>{link}</li>)
                     : <></>

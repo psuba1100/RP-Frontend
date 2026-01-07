@@ -3,12 +3,14 @@ import { useAuthStore } from "../store/authStore"
 import axios from "../api/axios"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { useGlobalSettingsStore } from "../store/globalSettingsStorage"
+import { useNewFlashcardStore } from "../store/newFlashcardStore"
 
 const LOGIN_URL = '/auth'
 
 export default function Login() {
     const setAuth = useAuthStore((state) => state.setAuth)
     const setTrustThisDevice = useGlobalSettingsStore((s) => s.setTrustThisDevice)
+    const clearCards = useNewFlashcardStore((s) => s.clearCards)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -18,6 +20,10 @@ export default function Login() {
     const [password, setPassword] = useState('')
     const [trustDevice, setTrustDevice] = useState(false)
     const [errMsg, setErrMsg] = useState('')
+
+    useEffect(() => {
+        clearCards()
+    }, [])
 
     useEffect(() => {
         setErrMsg('')
