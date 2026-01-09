@@ -1,11 +1,13 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { useSubjectStore } from "../../store/subjectsStore"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Coffee, Plus, SquarePlus } from "lucide-react"
 import SubjectElement from "./SubjectElement"
 
 export default function SubjectList() {
+    const inputField = useRef(null)
+
     const subjects = useSubjectStore((s) => s.subjects)
     const fetchSubjects = useSubjectStore((s) => s.fetchSubjects)
     const addSubject = useSubjectStore((s) => s.addSubject)
@@ -23,6 +25,7 @@ export default function SubjectList() {
 
     const createSubject = async (e) => {
         e.preventDefault()
+        inputField.current.focus()
 
         try {
             await axiosPrivate.post('/u/subject', {
@@ -51,6 +54,7 @@ export default function SubjectList() {
             <div className="block">
                 <label htmlFor="newSubject"></label>
                 <input
+                    ref={inputField}
                     autoComplete="off"
                     maxLength={32}
                     placeholder="Subject name"

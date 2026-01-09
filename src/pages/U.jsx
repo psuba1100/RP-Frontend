@@ -49,7 +49,7 @@ export default function U() {
           <aside className='block vertical g-2 item'>
             <button className='btn btn-v' onClick={() => navigate('/u/hub')}><BookType />Your study hub</button>
             <button className='btn btn-v' onClick={() => navigate('/u/flashcards')}><StickyNote /> Your flashcard library</button>
-            <button className='btn btn-v' onClick={() => navigate('/u/tasks')}><SquareCheckBig /> Your upcoming challanges</button>
+            <button className='btn btn-v' onClick={() => navigate('/u/tasks')}><SquareCheckBig /> Your upcoming challenges</button>
           </aside>
         </div>
       </main>

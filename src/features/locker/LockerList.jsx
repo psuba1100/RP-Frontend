@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useLockerStore } from "../../store/lockerStore"
 import LockerElement from "./LockerElement"
 import { Plus, Save } from "lucide-react"
@@ -6,6 +6,8 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate"
 import { useLocation, useNavigate } from "react-router-dom"
 
 export default function LockerList() {
+    const inputField = useRef(null)
+
     const items = useLockerStore((s) => s.items)
     const changes = useLockerStore((s) => s.changes)
     const toggleChange = useLockerStore((s) => s.toggleChange)
@@ -26,6 +28,7 @@ export default function LockerList() {
 
     const save = async (e) => {
         e.preventDefault()
+        inputField.current.focus()
 
         const data = exportToApiFormat()
 
@@ -57,6 +60,7 @@ export default function LockerList() {
             <p>{changes ? 'Careful, you have unsaved changes!' : ''}</p>
             <section className="block">
                 <input
+                    ref={inputField}
                     autoComplete="off"
                     maxLength={32}
                     type="text"
