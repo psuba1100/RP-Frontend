@@ -53,7 +53,7 @@ export default function U() {
           </aside>
         </div>
       </main>
-      <footer className="block">
+      <footer className="block" translate='no'>
         {'Don\'t forget: '}
         {task}
       </footer>

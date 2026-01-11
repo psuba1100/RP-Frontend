@@ -14,7 +14,7 @@ export default function FlashcardLayout() {
         <>
             <Outlet />
             <footer className="">
-                <div className="item block h-elements-left">
+                <div className="item block h-elements-left" translate='no'>
                     {`${metadata.title} created by ${metadata.relation == 'owner' ? 'you' : metadata.owner}`}
                 </div>
                 <div className="block item">

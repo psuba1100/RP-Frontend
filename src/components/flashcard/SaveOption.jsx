@@ -130,7 +130,7 @@ export default function SaveOption({ setErrMsg }) {
                                             <select value={selected} onChange={(e) => setSelected(e.target.value)}>
                                                 <option value="">— None —</option>
                                                 {subjects.map((subject) => (
-                                                    <option key={subject} value={subject}>
+                                                    <option key={subject} value={subject} translate='no'>
                                                         {subject}
                                                     </option>
                                                 ))}

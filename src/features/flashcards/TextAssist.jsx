@@ -76,56 +76,56 @@ There are three types of triangles by sides:
                             <h2>Text formatting</h2>
                             Flashcards support markdown rendering. This means, you can use specific syntax to format your questions and answers or to put emphasis on specific word.
                             <h3>Example</h3>
-                            <div className='block horizontal-priority g-2 h-elements-top mt'>
-                                <div className='black'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt' translate='no'>
+                                <div className='black item'>
                                     *This is Italic* <br /><br /> **This is Bold** <br /><br /> ***This is Bold and Italic***
                                 </div>
-                                <div className='black md-output md'>
+                                <div className='black md-output md item'>
                                     <MarkdownRenderer markdown={example1} />
                                 </div>
                             </div>
                             <br /><br />Among another supported rules are sorted and unsorted lists.
                             <h3>Example</h3>
-                            <div className='block horizontal-priority g-2 h-elements-top mt'>
-                                <div className='black'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt' translate='no'>
+                                <div className='black item'>
                                     The order of seasons is: <br /> 1. Spring <br /> 2. Summer <br /> 3. Autumn <br /> 4. winter <br /><br /><br /> There are three types of triangles by sides: <br /> * Equilateral <br /> * Isoceles <br /> * Scalene
                                 </div>
-                                <div className='black md-output md'>
+                                <div className='black md-output md item'>
                                     <MarkdownRenderer markdown={example5} />
                                 </div>
                             </div>
                             <br /><br />It can also be used to render text blocks or code blocks.
                             <h3>Example</h3>
-                            <div className='block horizontal-priority g-2 h-elements-top mt'>
-                                <div className='black'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt' translate='no'>
+                                <div className='black item'>
                                     Blah Blah `inline text blockt` Blah <br /><br /> ``` <br /> name = input('Enter your name: ') <br /> n = int(input('Enter a number: ')) <br /> for i in range(n): <br />  &nbsp; &nbsp; &nbsp; &nbsp;print(f'Hello {'{name}'}!') <br /> ``` <br />
                                 </div>
-                                <div className='black md-output md'>
+                                <div className='black md-output md item'>
                                     <MarkdownRenderer markdown={example2} />
                                 </div>
                             </div>
                             <br /><br /> But most importanty, it can convert LaTeX notation and render math equations.
                             <h3>Example</h3>
-                            <div className='block horizontal-priority g-2 h-elements-top mt'>
-                                <div className='black'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt' translate='no'>
+                                <div className='black item'>
                                     Inline equation: $A = B \cdot C$ <br /> <br />  Block equation: <br /> $$ <br /> v = \frac{'{s}{t}'} <br /> $$
                                 </div>
-                                <div className='black md-output md'>
+                                <div className='black md-output md item'>
                                     <MarkdownRenderer markdown={example3} />
                                 </div>
                             </div>
                             <h3>Useful notations</h3>
                             <em>You can find more LaTeX notations online.</em>
-                            <div className='block horizontal-priority g-2 h-elements-top mt'>
-                                <div className='black'>
+                            <div className='block horizontal-priority g-2 h-elements-top mt' translate='no'>
+                                <div className='black item'>
                                     A \cdot B <br /><br /> A_{'{index}'} <br /><br /> A^{'{exponent}'} <br /><br /> \frac{'{numerator}{denominator}'} <br /><br /> \sin (x) \cos (x) \tan (x) <br /><br /> \theta \phi \pi <br /><br /> {'\\le \\ge \\neq'}
                                 </div>
-                                <div className='black md-output md'>
+                                <div className='black md-output md item'>
                                     <MarkdownRenderer markdown={example4} />
                                 </div>
                             </div>
                             <h3>Try it out!</h3>
-                            <div className='block horizontal-priority g-2 mt h-elements-top'>
+                            <div className='block horizontal-priority g-2 mt h-elements-top' translate='no'>
                                 <textarea
                                     maxLength={2000}
                                     value={markdown}
@@ -138,7 +138,7 @@ There are three types of triangles by sides:
                                 </div>
                             </div>
                         </section>
-                        <button className="btn mt" onClick={() => { setOpen(false) }}>Cool!</button>
+                        <button className="btn mt btn-primary" onClick={() => { setOpen(false) }}>Cool!</button>
                     </main>
                 </Modal>
             )}

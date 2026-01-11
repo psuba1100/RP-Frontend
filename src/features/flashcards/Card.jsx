@@ -22,7 +22,7 @@ export default function Card({ question }) {
 
 
     return (
-        <section className="container vertical g-2">
+        <section className="container vertical g-2" translate='no'>
             <div
                 className={`flashcard ${flipped ? "flipped" : ""} ${noAnim ? "no-anim" : ""}`}
                 onClick={() => setFlipped(f => !f)}

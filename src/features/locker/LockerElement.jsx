@@ -5,7 +5,7 @@ export default function LockerElement({ item }) {
     const toggleItem = useLockerStore((s) => s.toggleItem)
     const removeItem = useLockerStore((s) => s.removeItem)
     return (
-        <li className='block horizontal-priority'>
+        <li className='block horizontal-priority' translate='no'>
             {item}
             <div className='block m'>
                 <button className='btn' onClick={() => { toggleItem(item) }}><Repeat /></button>

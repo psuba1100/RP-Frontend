@@ -95,7 +95,7 @@ export default function TaskList() {
                 <select value={selected} onChange={changeSubject}>
                     <option value="">— None —</option>
                     {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
+                        <option key={subject} value={subject} translate='no'>
                             {subject}
                         </option>
                     ))}

@@ -36,7 +36,7 @@ export default function SubjectElement({ subject, setErrMsg }) {
         }
     }
     return (
-        <li className="block g-05">
+        <li className="block g-05" translate='no'>
             {subject}
             <button className="btn" onClick={deleteSubject}><Trash /></button>
         </li>

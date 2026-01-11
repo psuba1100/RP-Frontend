@@ -86,7 +86,7 @@ export default function CreateFlashcard() {
                                 <select className="m" required value={subject} onChange={(e) => setSubject(e.target.value)}>
                                     <option value="">— None —</option>
                                     {subjects.map((subject) => (
-                                        <option key={subject} value={subject}>
+                                        <option key={subject} value={subject} translate='no'>
                                             {subject}
                                         </option>
                                     ))}

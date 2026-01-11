@@ -71,7 +71,7 @@ export default function Tasks() {
                                 <select className="m" required value={taskSubject} onChange={(e) => setTaskSubject(e.target.value)}>
                                     <option value="">— None —</option>
                                     {subjects.map((subject) => (
-                                        <option key={subject} value={subject}>
+                                        <option key={subject} value={subject} translate='no'>
                                             {subject}
                                         </option>
                                     ))}

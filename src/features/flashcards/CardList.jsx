@@ -95,7 +95,7 @@ export default function CardList() {
                     {subjects?.length
                         ? (
                             [...new Set(subjects)].map((subject) => (
-                                <option key={subject} value={subject}>
+                                <option key={subject} value={subject} translate='no'>
                                     {subject}
                                 </option>
                             ))

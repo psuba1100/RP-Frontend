@@ -41,9 +41,9 @@ export default function CardSet({ card }) {
     }
     return (
         <li className="block w-100 vertical outline">
-            <h3>{card.title}</h3>
-            <p><em>Created by {card.ownerUsername}</em></p>
-            <p>{card.description}</p>
+            <h3 translate='no'>{card.title}</h3>
+            <p translate='no'><em>Created by {card.ownerUsername}</em></p>
+            <p translate='no'>{card.description}</p>
             <div className="block horizontal-priority g-2">
                 <button className="btn btn-primary" onClick={redirectToFlashcard}><BrainCircuit /> Practice</button>
                 {card.access != 'owner' ? (

@@ -1,10 +1,7 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { useAuthStore } from "../../store/authStore"
-import { Coffee, House, LogOut } from "lucide-react"
+import { House, LogOut } from "lucide-react"
 import axios from "../../api/axios"
-import useAxiosPrivate from "../../hooks/useAxiosPrivate"
-import { useTasksStore } from "../../store/tasksStore"
-import { useEffect, useState } from "react"
 
 const LOGOUT_URL = '/auth/logout'
 
