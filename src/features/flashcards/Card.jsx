@@ -28,7 +28,7 @@ export default function Card({ question }) {
                 onClick={() => setFlipped(f => !f)}
             >
                 <div className="flashcard-inner">
-                    <div className="flashcard-front">
+                    <div className="flashcard-front md">
                         <MarkdownRenderer markdown={question.front.text}/>
                         {question.front?.image
                             ? (<img
@@ -39,7 +39,7 @@ export default function Card({ question }) {
                             : <></>
                         }
                     </div>
-                    <div className="flashcard-back dark">
+                    <div className="flashcard-back dark md">
                         <MarkdownRenderer markdown={question.back.text}/>
                         {question.back?.image
                             ? (<img

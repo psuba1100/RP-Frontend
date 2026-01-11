@@ -28,7 +28,6 @@ export default function LockerList() {
 
     const save = async (e) => {
         e.preventDefault()
-        inputField.current.focus()
 
         const data = exportToApiFormat()
 
@@ -68,7 +67,7 @@ export default function LockerList() {
                     className="input"
                     value={newItem}
                     onChange={(e) => { setNewItem(e.target.value) }} />
-                <button className="btn" onClick={() => { addItem(newItem, true, setErrMsg); setNewItem('') }}><Plus /></button>
+                <button className="btn" onClick={() => { addItem(newItem, true, setErrMsg); inputField.current.focus(); setNewItem('') }}><Plus /></button>
                 <button className="btn" onClick={save}><Save /></button>
             </section>
             <section className="block stretch h-elements-top">
