@@ -3,6 +3,7 @@ import { useFlashcardStore } from "../store/flashcardStore"
 import useAxiosPrivate from "../hooks/useAxiosPrivate"
 import { useEffect, useState } from "react"
 import Card from "../features/flashcards/Card"
+import { Ellipsis } from "lucide-react"
 
 export default function Flashcard() {
     const fetchFlashcard = useFlashcardStore((s) => s.fetchFlashcard)
@@ -31,6 +32,7 @@ export default function Flashcard() {
 
     return (
         <div className="main vertical">
+            <p className="tiny"><em>This set was created by a user of our service. We are not responsible for its content. You can report the set anonymously via the 'Options' menu.</em></p>
             <p className="err">{errMsg}</p>
             <Card question={currentQuestion} key={`${shuffleVersion}-${questionNumber}`}/>
         </div>

@@ -1,10 +1,11 @@
-import { BookMarked, Ellipsis, Share2, Trash } from "lucide-react"
+import { BookMarked, Ellipsis, FileExclamationPoint, Share2, Trash } from "lucide-react"
 import { useState } from "react"
 import { useFlashcardStore } from "../../store/flashcardStore"
 import Modal from "../../components/utility/Modal"
 import ShareOption from "../../components/flashcard/ShareOption"
 import SaveOption from "../../components/flashcard/SaveOption"
 import DeleteOption from "../../components/flashcard/DeleteOption"
+import ReportOption from "../../components/flashcard/ReportOption"
 
 export default function SetOptions() {
     const metadata = useFlashcardStore((s) => s.metadata)
@@ -12,6 +13,7 @@ export default function SetOptions() {
     const [open, setOpen] = useState(false)
     const [errMrg, setErrMsg] = useState('')
     const [operation, setOperation] = useState('share')
+    const [reported, setReported] = useState(false)
 
     return (
         <>
@@ -26,7 +28,7 @@ export default function SetOptions() {
                                 <button className="btn" disabled={operation == 'save'} onClick={() => setOperation('save')}><BookMarked /> Save</button>
                                 {metadata.relation == 'owner'
                                     ? <button className="btn" disabled={operation == 'delete'} onClick={() => setOperation('delete')}><Trash /> Delete</button>
-                                    : <></>
+                                    : <button className="btn" disabled={operation == 'report'} onClick={() => setOperation('report')}><FileExclamationPoint/> Report</button>
                                 }
                             </section>
                             <section className="item h-elements-right">
@@ -34,10 +36,13 @@ export default function SetOptions() {
                                     operation == 'share' && <ShareOption />
                                 }
                                 {
-                                    operation == 'save' && <SaveOption setErrMsg={setErrMsg}/>
+                                    operation == 'save' && <SaveOption setErrMsg={setErrMsg} />
                                 }
                                 {
-                                    operation == 'delete' && <DeleteOption setErrMsg={setErrMsg}/>
+                                    operation == 'delete' && <DeleteOption setErrMsg={setErrMsg} />
+                                }
+                                {
+                                    operation == 'report' && <ReportOption setErrMsg={setErrMsg} reported={reported} setReported={setReported}/>
                                 }
 
                             </section>

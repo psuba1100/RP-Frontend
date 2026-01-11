@@ -75,7 +75,7 @@ export default function CreateFlashcard() {
                 <CreationCard key={id} id={id} card={card} />
             ))}
             <button className="btn mt" onClick={addCreateCard}><SquarePlus /> Add new card</button>
-            <p className="tiny"><em>To make a flashcard set, start by creating a subject. Keep in mind that images may not be saved if the set isn’t submitted within 50 minutes of adding them. Images you upload are accessible to anyone on the internet. Everything you write on the flashcards can be accessed by other Winkify users. Do not include sensitive, personal or confidential information.</em></p>
+            <p className="tiny"><em>To make a flashcard set, start by creating a subject. Keep in mind that images may not be saved if the set isn’t submitted within 50 minutes of adding them. Images you upload are accessible to anyone on the internet. Everything you write on the flashcards can be accessed by other Winkify users. Do not include sensitive, personal or confidential information. Including digital content you don't own or explicit material may lead to permanent deletion of set and its content.</em></p>
             {open && (
                 <Modal onClose={() => setOpen(false)}>
                     <div className="block vertical">
