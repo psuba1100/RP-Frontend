@@ -17,6 +17,17 @@ export const useNewFlashcardStore = create(
                     }
                 })),
 
+            addCard: (id, front, back) =>
+                set((state) => ({
+                    cards: {
+                        ...state.cards,
+                        [id]: {
+                            front,
+                            back
+                        }
+                    }
+                })),
+            
             removeCard: (id) =>
                 set((state) => {
                     const { [id]: removed, ...rest } = state.cards;

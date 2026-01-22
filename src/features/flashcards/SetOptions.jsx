@@ -1,4 +1,4 @@
-import { BookMarked, Ellipsis, FileExclamationPoint, Share2, Trash } from "lucide-react"
+import { BookMarked, Ellipsis, FileExclamationPoint, FolderTree, Share2, Trash } from "lucide-react"
 import { useState } from "react"
 import { useFlashcardStore } from "../../store/flashcardStore"
 import Modal from "../../components/utility/Modal"
@@ -6,6 +6,7 @@ import ShareOption from "../../components/flashcard/ShareOption"
 import SaveOption from "../../components/flashcard/SaveOption"
 import DeleteOption from "../../components/flashcard/DeleteOption"
 import ReportOption from "../../components/flashcard/ReportOption"
+import BranchOption from "../../components/flashcard/BranchOption"
 
 export default function SetOptions() {
     const metadata = useFlashcardStore((s) => s.metadata)
@@ -26,6 +27,7 @@ export default function SetOptions() {
                             <section className="block vertical item">
                                 <button className="btn" disabled={operation == 'share'} onClick={() => setOperation('share')}><Share2 /> Share</button>
                                 <button className="btn" disabled={operation == 'save'} onClick={() => setOperation('save')}><BookMarked /> Save</button>
+                                <button className="btn" disabled={operation == 'branch'} onClick={() => setOperation('branch')}><FolderTree /> Branch</button>
                                 {metadata.relation == 'owner'
                                     ? <button className="btn" disabled={operation == 'delete'} onClick={() => setOperation('delete')}><Trash /> Delete</button>
                                     : <button className="btn" disabled={operation == 'report'} onClick={() => setOperation('report')}><FileExclamationPoint/> Report</button>
@@ -43,6 +45,9 @@ export default function SetOptions() {
                                 }
                                 {
                                     operation == 'report' && <ReportOption setErrMsg={setErrMsg} reported={reported} setReported={setReported}/>
+                                }
+                                {
+                                    operation == 'branch' && <BranchOption setErrMsg={setErrMsg}/>
                                 }
 
                             </section>
