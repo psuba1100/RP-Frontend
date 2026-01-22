@@ -38,8 +38,8 @@ export default function FlashcardItem({ id, card }) {
             await axiosPrivate.delete('/r/image', { data: { imgName: filename } });
             updateCard(id, side, "image", "");
         } catch (err) {
-            if (err.response && err.response.status === 404) {
-                console.warn(`Image ${filename} not found, ignoring.`);
+            if (err.response && (err.response.status === 404 || err.response.status === 403)) {
+                console.warn(`Image ${filename} not found or the user is not owner, ignoring.`);
                 updateCard(id, side, "image", "");
             } else {
                 console.error(err);
